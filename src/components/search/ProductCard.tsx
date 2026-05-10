@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue } from 'framer-motion'
 import { Star, MapPin, Clock, ArrowRight, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -33,112 +33,87 @@ export default function ProductCard({ product, index }: ProductCardProps) {
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -10 }}
-      className="glass-card group relative flex flex-col overflow-hidden rounded-[2rem] border border-cyan/10 bg-navy-light/30 backdrop-blur-2xl transition-all duration-500 hover:border-cyan/40 hover:shadow-[0_30px_100px_rgba(0,212,255,0.2)]"
+      transition={{ duration: 0.6, delay: index * 0.05 }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-xl transition-all duration-300 hover:border-cyan/30 hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)]"
     >
       {/* Shine Overlay */}
       <motion.div
         className="pointer-events-none absolute inset-0 z-30 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(0,212,255,0.15), transparent 40%)`,
+          background: `radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(0,212,255,0.08), transparent 60%)`,
         }}
       />
 
-      {/* Image Section with Parallax */}
-      <div className="relative aspect-[16/11] w-full overflow-hidden">
-        <motion.div 
-          className="h-full w-full"
-          whileHover={{ scale: 1.15 }}
-          transition={{ duration: 1.5, ease: [0.33, 1, 0.68, 1] }}
-        >
-          <Image
-            src={product.image}
-            alt={t(product.titleKey)}
-            fill
-            className="object-cover"
-          />
-        </motion.div>
+      {/* Image Section */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <Image
+          src={product.image}
+          alt={t(product.titleKey)}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent" />
         
-        <div className="destination-overlay absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
-        
-        {/* Top Badges */}
-        <div className="absolute left-6 top-6 z-20 flex flex-col gap-2">
-          <span className="flex items-center gap-2 rounded-full bg-navy/60 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-cyan backdrop-blur-xl border border-cyan/20">
-            <Sparkles className="size-3" />
+        {/* Category Badge */}
+        <div className={`absolute top-2 sm:top-4 ${dir === 'rtl' ? 'right-2 sm:right-4' : 'left-2 sm:left-4'} z-20`}>
+          <span className="flex items-center gap-1.5 rounded-full bg-navy/80 px-2 sm:px-3 py-1 text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-cyan backdrop-blur-md border border-cyan/20">
+            <Sparkles className="size-2 sm:size-3" />
             {t(`category.${product.category}`)}
           </span>
         </div>
 
-        {/* Price Tag - Floating Style */}
-        <div className="absolute bottom-6 right-6 z-20">
-          <div className="rounded-2xl bg-white/10 p-3 backdrop-blur-xl border border-white/20 shadow-2xl">
-            <p className="text-[10px] font-bold text-cyan/70 uppercase tracking-widest">{t('from')}</p>
-            <p className="text-2xl font-black text-white leading-none">
-              ${product.price}
-            </p>
+        {/* Price Tag */}
+        <div className={`absolute bottom-2 sm:bottom-4 ${dir === 'rtl' ? 'left-2 sm:left-4' : 'right-2 sm:right-4'} z-20`}>
+          <div className="text-right">
+            <p className="text-[8px] sm:text-[10px] font-bold text-cyan/70 uppercase tracking-widest leading-none mb-0.5 sm:mb-1">{t('from')}</p>
+            <p className="text-lg sm:text-2xl font-black text-white leading-none">${product.price}</p>
           </div>
         </div>
       </div>
 
       {/* Content Section */}
-      <div className="relative z-10 flex flex-1 flex-col p-8">
-        <div className="mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
+      <div className="flex flex-1 flex-col p-3 sm:p-5 lg:p-6">
+        <div className="mb-2 sm:mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-0.5 sm:gap-1">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`size-3.5 ${
-                  i < product.rating 
-                    ? 'fill-cyan text-cyan drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]' 
-                    : 'text-cyan/10'
-                }`}
+                className={`size-2.5 sm:size-3 ${i < product.rating ? 'fill-cyan text-cyan' : 'text-white/10'}`}
               />
             ))}
           </div>
-          {product.duration && (
-            <span className="rounded-lg bg-white/5 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-slate-400">
-              {product.duration}
-            </span>
-          )}
+          <span className="text-[8px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            {product.duration || 'Daily'}
+          </span>
         </div>
 
-        <h3 className="mb-2 text-2xl font-black tracking-tight text-white transition-colors duration-300 group-hover:text-cyan">
+        <h3 className="mb-1.5 text-sm sm:text-lg lg:text-xl font-black tracking-tight text-white group-hover:text-cyan transition-colors line-clamp-1">
           {t(product.titleKey)}
         </h3>
 
-        <p className="mb-6 line-clamp-2 text-sm leading-relaxed text-slate-500 font-medium">
-          Experience the ultimate luxury at {t(product.titleKey)}. Located in the heart of {product.location}, this {product.category} offers world-class amenities and breathtaking views.
+        <p className="mb-4 sm:mb-6 line-clamp-2 text-[10px] sm:text-xs leading-relaxed text-slate-400 font-medium">
+          {product.descriptionKey ? t(product.descriptionKey) : t('hero.subheadline.' + product.titleKey.split('.').pop())}
         </p>
 
-        <div className="mb-8 flex items-center justify-between border-t border-white/5 pt-6">
-          <div className="flex items-center gap-2.5 text-xs font-bold text-slate-400 uppercase tracking-widest">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-cyan/10 text-cyan">
-              <MapPin className="size-3.5" />
-            </div>
-            {product.location}
-          </div>
-          
-          <div className="flex items-center gap-2 text-xs font-bold text-cyan uppercase tracking-widest">
-            <Clock className="size-3.5" />
-            {product.duration || 'Flexible'}
+        {/* Info Row */}
+        <div className="mb-4 sm:mb-6 flex items-center justify-between border-t border-white/5 pt-3 sm:pt-5">
+          <div className="flex items-center gap-1.5 text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">
+            <MapPin className="size-2.5 sm:size-3 text-cyan flex-shrink-0" />
+            <span className="truncate">{product.locationKey ? t(product.locationKey) : product.location}</span>
           </div>
         </div>
 
         <div className="mt-auto">
-          <Link href={`/product/${product.id}`}>
+          <Link href={`/product/${product.id}?location=${encodeURIComponent(product.location)}`} className="block">
             <Button
-              className="cta-glow w-full group/btn relative h-14 overflow-hidden rounded-2xl border border-cyan/40 bg-cyan/10 text-lg font-black tracking-wider text-cyan transition-all duration-500 hover:bg-cyan/30 hover:border-cyan/60"
+              className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl bg-white text-navy font-black text-[10px] sm:text-xs uppercase tracking-wider hover:bg-cyan hover:text-navy transition-all duration-300 group/btn"
             >
-              <span className="relative z-10 flex items-center justify-center gap-3">
+              <span className="flex items-center gap-2">
                 {t('destinations.bookNow')}
-                <ArrowRight className={`size-5 transition-transform duration-500 ${dir === 'rtl' ? 'rotate-180 group-hover/btn:-translate-x-2' : 'group-hover/btn:translate-x-2'}`} />
+                <ArrowRight className={`size-3 sm:size-4 transition-transform duration-300 ${dir === 'rtl' ? 'rotate-180 group-hover/btn:-translate-x-1' : 'group-hover/btn:translate-x-1'}`} />
               </span>
-              
-              {/* Animated background glow inside button */}
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-cyan/20 to-transparent transition-transform duration-1000 group-hover/btn:translate-x-full" />
             </Button>
           </Link>
         </div>

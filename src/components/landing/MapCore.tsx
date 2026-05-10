@@ -100,7 +100,7 @@ export default function InteractiveMap() {
               {t('map.subtitle')}
             </span>
           </div>
-          <h2 className="gradient-text mb-4 text-4xl font-black tracking-tight animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 sm:text-5xl md:text-7xl">
+          <h2 className="gradient-text mb-4 text-3xl font-black tracking-tight animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 sm:text-4xl md:text-5xl lg:text-6xl">
             {t('map.title')}
           </h2>
         </div>

@@ -63,9 +63,9 @@ const socialLinks = [
   { icon: Facebook, href: 'https://www.facebook.com/dahabdreamtour', label: 'Facebook' },
   { icon: Instagram, href: 'https://www.instagram.com/dahab.dream.tour/', label: 'Instagram' },
   { icon: Send, href: 'https://t.me/+dTDLRWJSpDYxYmY0', label: 'Telegram' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/dahab-dream-tour-692822287/', label: 'LinkedIn' },
+  // { icon: Linkedin, href: 'https://www.linkedin.com/in/dahab-dream-tour-692822287/', label: 'LinkedIn' },
   { icon: TikTokIcon, href: 'https://tiktok.com/@dahabdreamtour', label: 'TikTok' },
-  { icon: Youtube, href: 'https://www.youtube.com/@Dahab-dream', label: 'YouTube' },
+  // { icon: Youtube, href: 'https://www.youtube.com/@Dahab-dream', label: 'YouTube' },
 ] as const
 
 function SocialIcon({ icon: Icon, href, label }: (typeof socialLinks)[number]) {
@@ -179,7 +179,7 @@ export default function Footer() {
   const { t } = useI18n()
 
   return (
-    <footer className="relative w-full bg-[#0A192F]">
+    <footer className="relative w-full bg-[#0A192F] keep-dark">
       {/* Top gradient divider */}
       <div className="section-divider" />
 

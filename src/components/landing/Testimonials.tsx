@@ -24,7 +24,7 @@ export default function Testimonials() {
   const { t } = useI18n();
 
   return (
-    <section id="testimonials" className="relative w-full overflow-hidden py-24 md:py-32">
+    <section id="testimonials" className="relative w-full overflow-hidden py-[var(--section-spacing)]">
       {/* Subtle background */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
@@ -46,7 +46,7 @@ export default function Testimonials() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="mb-14 flex flex-col items-center text-center"
+          className="mb-8 lg:mb-12 flex flex-col items-center text-center"
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan/20 bg-cyan/5 px-4 py-1.5 backdrop-blur-md">
             <div className="flex gap-1">
@@ -59,7 +59,7 @@ export default function Testimonials() {
             <span className="ml-1 text-xs font-medium uppercase tracking-wider text-cyan-light">On Google</span>
           </div>
           
-          <h2 className="gradient-text text-3xl font-extrabold tracking-tight md:text-5xl">
+          <h2 className="gradient-text text-2xl font-extrabold tracking-tight md:text-4xl py-2">
             {t('testimonials.title')}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">

@@ -25,71 +25,6 @@ const destinations = [
   { id: "sinai", name: "sinai.name", tagline: "sinai.tagline", image: "/images/hero/08-sinai.jpg" },
 ] as const;
 
-/* ── Single destination card ───────────────────────────────────────────────── */
-
-/* ── Single destination card ───────────────────────────────────────────────── */
-
-function DestinationCard({
-  destination,
-  index,
-  onSelect,
-}: {
-  destination: (typeof destinations)[number];
-  index: number;
-  onSelect: (id: string) => void;
-}) {
-  const { t } = useI18n();
-
-  return (
-    <div
-      className="group cursor-pointer transition-transform duration-300 hover:-translate-y-2 will-change-transform animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both w-full flex justify-center"
-      style={{ animationDelay: `${index * 150}ms` }}
-      onClick={() => onSelect(destination.id)}
-    >
-      <div className="glass-card relative h-[320px] w-full max-w-[380px] min-[465px]:max-w-none min-[465px]:h-[240px] sm:h-[280px] md:h-[320px] overflow-hidden rounded-2xl">
-        {/* Background image */}
-        <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src={destination.image}
-            alt={t(destination.name)}
-            fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 will-change-transform"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            loading="lazy"
-          />
-        </div>
-
-        {/* Gradient overlay */}
-        <div className="destination-overlay absolute inset-0 z-10" />
-
-        {/* Hover glow ring */}
-        <div className="pointer-events-none absolute inset-0 z-20 rounded-2xl border border-transparent transition-all duration-500 group-hover:border-cyan/30 group-hover:shadow-[0_0_30px_rgba(0,212,255,0.15)]" />
-
-        {/* Content */}
-        <div className="relative z-30 flex h-full flex-col justify-end p-6 min-[465px]:p-4 sm:p-5 md:p-6">
-          <h3
-            className="font-bold text-white/90 transition-opacity duration-300 group-hover:text-white text-3xl min-[465px]:text-xl sm:text-2xl md:text-3xl lg:text-4xl"
-          >
-            {t(destination.name)}
-          </h3>
-          <p className="mt-1 text-sm min-[465px]:text-xs sm:text-sm font-medium text-cyan-light line-clamp-2">
-            {t(destination.tagline)}
-          </p>
-
-          <Button
-            variant="ghost"
-            className="mt-3 md:mt-4 w-fit h-10 min-[465px]:h-8 sm:h-10 gap-2 self-start rounded-full border border-cyan/30 bg-cyan/10 px-5 min-[465px]:px-3 sm:px-5 text-sm min-[465px]:text-xs sm:text-sm font-medium text-cyan-light backdrop-blur-sm transition-all duration-300 hover:border-cyan/60 hover:bg-cyan/20 hover:text-white"
-          >
-            {t("destinations.cta")}
-            <ArrowRight className="size-4 min-[465px]:size-3.5 sm:size-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ── Destinations section ──────────────────────────────────────────────────── */
 
 export default function Destinations() {
   const { t } = useI18n();
@@ -100,37 +35,26 @@ export default function Destinations() {
   return (
     <section
       id="destinations"
-      className="relative overflow-hidden py-16 px-4 md:px-8 lg:px-12"
+      className="relative overflow-hidden py-[var(--section-spacing)] px-[var(--container-padding)]"
     >
-      {/* Subtle radial glow at top */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 h-[500px] w-[800px] opacity-40"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(0,212,255,0.06) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1600px]">
+      <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section header */}
         <motion.div
-          className="mb-10 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="mb-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="gradient-text text-4xl font-extrabold tracking-tight md:text-5xl">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4 py-2">
             {t("destinations.title")}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+          <p className="mx-auto max-w-2xl text-slate-400">
             {t("destinations.subtitle")}
           </p>
         </motion.div>
 
-        <div
-          className="grid grid-cols-1 gap-4 min-[465px]:grid-cols-2 lg:grid-cols-4 xl:gap-6"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {destinations.map((dest, i) => (
             <DestinationCard
               key={dest.id}
@@ -142,7 +66,6 @@ export default function Destinations() {
         </div>
       </div>
 
-      {/* Modal - key resets state when destination changes */}
       <DestinationModal
         key={selected?.id ?? 'closed'}
         destination={
@@ -158,5 +81,54 @@ export default function Destinations() {
         onClose={() => setSelectedDestination(null)}
       />
     </section>
+  );
+}
+
+function DestinationCard({
+  destination,
+  index,
+  onSelect,
+}: {
+  destination: (typeof destinations)[number];
+  index: number;
+  onSelect: (id: string) => void;
+}) {
+  const { t } = useI18n();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="group cursor-pointer"
+      onClick={() => onSelect(destination.id)}
+    >
+      <div className="glass-card relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 group-hover:border-cyan/30 transition-all duration-300">
+        <Image
+          src={destination.image}
+          alt={t(destination.name)}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+        />
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
+        <div className="absolute inset-0 p-6 flex flex-col justify-end">
+          <h3 className="text-xl font-bold text-white mb-1 group-hover:text-cyan transition-colors">
+            {t(destination.name)}
+          </h3>
+          <p className="text-xs text-white/60 line-clamp-2 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+            {t(destination.tagline)}
+          </p>
+          
+          <div className="mt-4 flex items-center text-cyan text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+            {t("destinations.cta")}
+            <ArrowRight className="ml-2 size-3 transition-transform group-hover:translate-x-1" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 }

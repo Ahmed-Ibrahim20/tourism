@@ -143,7 +143,7 @@ export default function Honeymoon() {
             {/* Title */}
             <motion.h2
               variants={fadeUp}
-              className="gradient-text mb-4 text-3xl font-extrabold leading-tight tracking-tight md:text-5xl"
+              className="gradient-text mb-4 text-3xl font-extrabold leading-tight tracking-tight md:text-5xl py-2"
             >
               {t("honeymoon.title")}
             </motion.h2>

@@ -171,7 +171,7 @@ export default function WhyUs() {
   const statsInView = useInView(statsRef, { once: true, amount: 0.3 });
 
   return (
-    <section id="why-us" className="relative w-full overflow-hidden py-24 md:py-32">
+    <section id="why-us" className="relative w-full overflow-hidden py-[var(--section-spacing)]">
       {/* Subtle background pattern */}
       <div className="noise-overlay pointer-events-none absolute inset-0" />
       <div
@@ -186,7 +186,7 @@ export default function WhyUs() {
         {/* ── Row 1: Stats Bar ────────────────────────────────────────────── */}
         <div
           ref={statsRef}
-          className="glass-strong mb-20 rounded-2xl p-6 sm:p-8 md:p-10"
+          className="glass-strong mb-12 lg:mb-16 rounded-2xl p-6 sm:p-8 md:p-10"
         >
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-4">
             {stats.map((stat, i) => (
@@ -197,13 +197,13 @@ export default function WhyUs() {
 
         {/* ── Row 2: Reason Cards ─────────────────────────────────────────── */}
         <motion.div
-          className="mb-14 text-center"
+          className="mb-8 lg:mb-12 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <h2 className="gradient-text text-3xl font-extrabold tracking-tight md:text-5xl">
+          <h2 className="gradient-text text-2xl font-extrabold tracking-tight md:text-4xl py-2">
             {t('whyUs.title')}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
