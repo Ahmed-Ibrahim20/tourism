@@ -52,7 +52,8 @@ const modalVariants = {
 /* ── Modal component ───────────────────────────────────────────────────────── */
 
 export default function DestinationModal({ destination, onClose }: DestinationModalProps) {
-  const { t } = useI18n();
+  const { t, dir } = useI18n();
+  const isRTL = dir === 'rtl';
 
   /* ESC key handler */
   const handleKeyDown = useCallback(
@@ -88,7 +89,7 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
     {
       id: "hotels",
       titleKey: "tab.hotels",
-      descKey: "Discover premium 5-star resorts and luxurious boutique hotels tailored for unparalleled comfort.",
+      descKey: "tab.hotels.desc",
       icon: Building2,
       image: "/images/hotel-luxury.png",
       fallbackImage: "/images/hero/03-hurghada.jpg"
@@ -122,6 +123,7 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
           exit="exit"
           transition={{ duration: 0.25 }}
           onClick={onClose}
+          dir={dir}
         >
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
@@ -138,7 +140,7 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 md:right-6 md:top-6 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all duration-300 hover:bg-cyan/80 hover:scale-110"
+              className={`absolute top-4 md:top-6 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all duration-300 hover:bg-cyan/80 hover:scale-110 ${isRTL ? 'left-4 md:left-6' : 'right-4 md:right-6'}`}
               aria-label="Close"
             >
               <X className="size-5" />
@@ -155,7 +157,7 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-transparent" />
               
-              <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-10 lg:px-12">
+              <div className={`absolute inset-0 flex flex-col justify-end p-5 md:p-10 lg:px-12 ${isRTL ? 'text-right' : 'text-left'}`}>
                 <h2 className="text-3xl font-black text-white md:text-5xl drop-shadow-lg">
                   {destination.name}
                 </h2>
@@ -163,7 +165,7 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
                   {destination.tagline}
                 </div>
                 <p className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-200 md:text-sm">
-                  Immerse yourself in the magic of {destination.name}. Whether you are dreaming of a romantic escape, seeking the finest luxury resorts, or craving an unforgettable adventure, we have perfectly tailored experiences waiting just for you. Select your path below to begin.
+                  {t("destinations.modalDescription", { name: destination.name })}
                 </p>
               </div>
             </div>
@@ -199,8 +201,8 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
                       <div className="absolute inset-0 z-10 bg-gradient-to-t from-navy/95 via-navy/50 to-transparent transition-opacity duration-300 group-hover:via-navy/40" />
 
                       {/* Card Content */}
-                      <div className="relative z-20">
-                        <div className="mb-3 w-fit rounded-full bg-cyan/20 p-2.5 backdrop-blur-md transition-colors duration-300 group-hover:bg-cyan/40">
+                      <div className={`relative z-20 ${isRTL ? 'text-right' : 'text-left'}`}>
+                        <div className={`mb-3 w-fit rounded-full bg-cyan/20 p-2.5 backdrop-blur-md transition-colors duration-300 group-hover:bg-cyan/40 ${isRTL ? 'mr-0 ml-auto' : ''}`}>
                           <cat.icon className="size-5 text-cyan-light" />
                         </div>
                         
@@ -209,11 +211,12 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
                         </h3>
                         
                         <p className="line-clamp-2 text-xs md:text-sm font-medium text-slate-300">
-                          {cat.descKey.includes('.') ? t(cat.descKey) : cat.descKey}
+                          {t(cat.descKey)}
                         </p>
 
-                        <div className="mt-5 flex items-center text-sm font-bold text-cyan-light transition-colors group-hover:text-white">
-                          Explore Options <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+                        <div className={`mt-5 flex items-center text-sm font-bold text-cyan-light transition-colors group-hover:text-white ${isRTL ? 'flex-row-reverse justify-start' : ''}`}>
+                          {t("destinations.exploreOptions")} 
+                          <ArrowRight className={`size-4 transition-transform ${isRTL ? 'mr-0 ml-2 rotate-180 group-hover:-translate-x-1' : 'ml-2 group-hover:translate-x-1'}`} />
                         </div>
                       </div>
                     </Link>

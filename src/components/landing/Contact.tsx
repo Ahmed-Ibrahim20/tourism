@@ -15,6 +15,9 @@ import { useI18n } from '@/lib/i18n';
 interface ContactFormData {
   name: string;
   email: string;
+  phone: string;
+  startDate: string;
+  endDate: string;
   message: string;
 }
 
@@ -65,7 +68,7 @@ export default function Contact() {
     // Construct the email body
     const subject = encodeURIComponent(`New Travel Inquiry from ${data.name}`);
     const body = encodeURIComponent(
-      `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+      `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nDates: ${data.startDate} to ${data.endDate}\n\nMessage:\n${data.message}`
     );
 
     // Open user's default email client
@@ -265,6 +268,67 @@ export default function Contact() {
                   {errors.email && (
                     <p className="text-xs text-red-400">{errors.email.message}</p>
                   )}
+                </div>
+
+                {/* Phone Field */}
+                <div className="flex flex-col gap-2">
+                  <Label
+                    htmlFor="contact-phone"
+                    className="text-sm font-semibold uppercase tracking-wider text-cyan-light"
+                  >
+                    {t('product.phone') || 'Phone'}
+                  </Label>
+                  <Input
+                    id="contact-phone"
+                    type="tel"
+                    placeholder="+20 ..."
+                    className="h-12 rounded-xl border-cyan/15 bg-navy/80 text-foreground placeholder:text-slate-500 focus:border-cyan focus:ring-cyan/20"
+                    {...register('phone', {
+                      required: 'Phone number is required',
+                      minLength: { value: 8, message: 'Invalid phone number' }
+                    })}
+                  />
+                  {errors.phone && (
+                    <p className="text-xs text-red-400">{errors.phone.message}</p>
+                  )}
+                </div>
+
+                {/* Dates Row */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-2">
+                    <Label
+                      htmlFor="start-date"
+                      className="text-sm font-semibold uppercase tracking-wider text-cyan-light"
+                    >
+                      {t('filter.from') || 'From'}
+                    </Label>
+                    <Input
+                      id="start-date"
+                      type="date"
+                      className="h-12 rounded-xl border-cyan/15 bg-navy/80 text-foreground focus:border-cyan focus:ring-cyan/20"
+                      {...register('startDate', { required: 'Start date is required' })}
+                    />
+                    {errors.startDate && (
+                      <p className="text-xs text-red-400">{errors.startDate.message}</p>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label
+                      htmlFor="end-date"
+                      className="text-sm font-semibold uppercase tracking-wider text-cyan-light"
+                    >
+                      {t('filter.to') || 'To'}
+                    </Label>
+                    <Input
+                      id="end-date"
+                      type="date"
+                      className="h-12 rounded-xl border-cyan/15 bg-navy/80 text-foreground focus:border-cyan focus:ring-cyan/20"
+                      {...register('endDate', { required: 'End date is required' })}
+                    />
+                    {errors.endDate && (
+                      <p className="text-xs text-red-400">{errors.endDate.message}</p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Message Field */}

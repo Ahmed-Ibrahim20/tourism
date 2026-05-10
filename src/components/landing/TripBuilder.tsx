@@ -132,7 +132,7 @@ export default function TripBuilder() {
   };
 
   return (
-    <section id="trip-builder" className="relative w-full py-24 md:py-32">
+    <section id="trip-builder" className="relative w-full py-[var(--section-spacing)]">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         {/* ── Section Header ───────────────────────────────────────────── */}
         <motion.div
@@ -141,9 +141,9 @@ export default function TripBuilder() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="mb-12 text-center"
+          className="mb-8 lg:mb-12 text-center"
         >
-          <h2 className="gradient-text mb-4 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <h2 className="gradient-text mb-4 text-2xl font-extrabold tracking-tight md:text-4xl py-2">
             {t('tripBuilder.title')}
           </h2>
           <p className="mx-auto max-w-xl text-lg text-slate-400">
@@ -166,7 +166,7 @@ export default function TripBuilder() {
               {t('tripBuilder.budget')}
             </label>
             <div className="mb-4 text-center">
-              <span className="text-5xl font-extrabold text-cyan md:text-6xl">
+              <span className="text-4xl font-extrabold text-cyan md:text-5xl">
                 ${budget.toLocaleString()}
               </span>
             </div>

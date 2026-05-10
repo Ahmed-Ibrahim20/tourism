@@ -13,49 +13,49 @@ const slides = [
   {
     image: "/images/hero/01-giza.jpg",
     alt: "Great Pyramids of Giza",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.giza",
     subtitleKey: "hero.subheadline.giza",
   },
   {
     image: "/images/hero/02-dahab.jpg",
     alt: "Dahab Blue Hole",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.dahab",
     subtitleKey: "hero.subheadline.dahab",
   },
   {
     image: "/images/hero/03-hurghada.jpg",
     alt: "Hurghada Coastline",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.hurghada",
     subtitleKey: "hero.subheadline.hurghada",
   },
   {
     image: "/images/hero/04-sharm.jpg",
     alt: "Sharm El Sheikh",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.sharm",
     subtitleKey: "hero.subheadline.sharm",
   },
   {
     image: "/images/hero/05-luxor.jpg",
     alt: "Luxor Ancient Temples",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.luxor",
     subtitleKey: "hero.subheadline.luxor",
   },
   {
     image: "/images/hero/06-alexandria.jpg",
     alt: "Alexandria Mediterranean",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.alexandria",
     subtitleKey: "hero.subheadline.alexandria",
   },
   {
     image: "/images/hero/07-nile.jpg",
     alt: "Nile River Cruise",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.nile",
     subtitleKey: "hero.subheadline.nile",
   },
   {
     image: "/images/hero/08-sinai.jpg",
     alt: "Sinai Mountains",
-    headlineKey: "hero.headline",
+    headlineKey: "hero.headline.sinai",
     subtitleKey: "hero.subheadline.sinai",
   },
 ];
@@ -174,7 +174,7 @@ export default function Hero() {
   const slide = slides[current];
 
   return (
-    <section id="home" className="relative min-h-[100svh] lg:min-h-[100vh] w-full overflow-hidden">
+    <section id="home" className="relative min-h-[100svh] lg:min-h-[100vh] w-full overflow-hidden keep-dark">
       {/* ── Background Slides ──────────────────────────────────────── */}
       {/* ── Background Slides (Optimized for Preload & Performance) ── */}
       {slides.map((slideItem, index) => {
@@ -247,7 +247,7 @@ export default function Hero() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="gradient-text text-4xl font-black leading-[1.1] tracking-tight md:text-5xl lg:text-6xl xl:text-[4rem] w-full"
+                className="gradient-text text-2xl font-black leading-[1.2] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl w-full"
               >
                 {t(slide.headlineKey)}
               </motion.h1>
@@ -262,7 +262,7 @@ export default function Hero() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base lg:text-lg"
+                className="max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base lg:text-lg mt-2"
               >
                 {t(slide.subtitleKey)}
               </motion.p>
@@ -273,7 +273,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-col items-start gap-3 mt-3 w-full sm:w-auto sm:flex-row md:items-center md:justify-center"
+              className="flex flex-col items-start gap-2.5 mt-4 w-full sm:w-auto sm:flex-row md:items-center md:justify-center"
             >
               <Button
                 size="lg"

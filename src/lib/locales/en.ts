@@ -1,0 +1,308 @@
+const en = {
+  // ── Navigation ─────────────────────────────────────────────────────
+  'nav.home': 'Home',
+  'nav.search': 'Search',
+  'search.popular': 'Popular Searches',
+  'nav.destinations': 'Destinations',
+  'nav.experiences': 'Experiences',
+  'nav.honeymoon': 'Honeymoon',
+  'nav.about': 'About',
+  'nav.contact': 'Contact',
+  'nav.cta': 'Plan Your Trip',
+  'nav.planTrip': 'Plan Your Trip',
+  'nav.login': 'Login',
+  'nav.register': 'Sign Up',
+  'nav.logout': 'Logout',
+  'nav.language': 'Language',
+  'brand.name': 'Dahab Dream Tour',
+
+  // ── Hero ───────────────────────────────────────────────────────────
+  'hero.tagline': 'Luxury Egyptian Travel Experiences',
+  'hero.headline': 'Discover Egypt Like Never Before',
+  'hero.headline.giza': 'The Majesty of Giza',
+  'hero.headline.dahab': 'The Golden Sands of Dahab',
+  'hero.headline.hurghada': 'Red Sea Paradise',
+  'hero.headline.sharm': 'Pearl of the Sinai',
+  'hero.headline.luxor': 'City of Pharaohs',
+  'hero.headline.alexandria': 'Mediterranean Jewel',
+  'hero.headline.nile': 'The Eternal Nile',
+  'hero.headline.sinai': 'Sacred Peaks',
+  'hero.subheadline':
+    'From the golden shores of Dahab to the vibrant reefs of the Red Sea — curated luxury journeys tailored to your dreams.',
+  'hero.subheadline.giza':
+    'Stand before the timeless Great Pyramids of Giza — where ancient pharaohs built monuments that have endured for over 4,500 years.',
+  'hero.subheadline.dahab':
+    'Dive into the crystal-clear waters of the Blue Hole, where desert mountains meet the most vibrant coral reefs in the world.',
+  'hero.subheadline.hurghada':
+    'Experience the ultimate Red Sea paradise — luxury resorts, pristine beaches, and world-class diving await you.',
+  'hero.subheadline.sharm':
+    'Discover Sharm El Sheikh, where the Sinai mountains meet turquoise waters — a playground for divers and luxury seekers.',
+  'hero.subheadline.luxor':
+    'Walk through the Valley of the Kings and ancient temples of Luxor — where the glory of pharaohs comes alive.',
+  'hero.subheadline.alexandria':
+    'Explore the Mediterranean jewel of Alexandria — where ancient history and modern elegance meet at the sea.',
+  'hero.subheadline.nile':
+    'Sail the legendary Nile River at sunset — a timeless journey through the heart of ancient Egyptian civilization.',
+  'hero.subheadline.sinai':
+    'Ascend the sacred peaks of Mount Sinai — where breathtaking sunrises and spiritual serenity await.',
+  'hero.cta': 'Plan My Trip',
+  'hero.secondaryCta': 'Explore Destinations',
+  'hero.rating': 'Rated 4.7/5 by travelers',
+  'hero.travelers': '5,000+ Happy Travelers',
+
+  // ── Destinations ───────────────────────────────────────────────────
+  'destinations.title': 'Explore Our Destinations',
+  'destinations.subtitle':
+    'Handpicked locations for unforgettable experiences',
+  'destinations.cta': 'View Details',
+  'destinations.bookNow': 'Book Now',
+  'destinations.modalDescription': 'Immerse yourself in the magic of {name}. Whether you are dreaming of a romantic escape, seeking the finest luxury resorts, or craving an unforgettable adventure, we have perfectly tailored experiences waiting just for you.',
+  'destinations.exploreOptions': 'Explore Options',
+  'dahab.name': 'Dahab',
+  'dahab.tagline': 'Where the desert meets the sea',
+  'hurghada.name': 'Hurghada',
+  'hurghada.tagline': 'Gateway to the Red Sea',
+  'sharm.name': 'Sharm El Sheikh',
+  'sharm.tagline': 'Pearl of the Sinai',
+  'aswan.name': 'Aswan',
+  'aswan.tagline': 'Nubian soul of the Nile',
+  'luxor.name': 'Luxor',
+  'luxor.tagline': 'The world\'s greatest open-air museum',
+  'alexandria.name': 'Alexandria',
+  'alexandria.tagline': 'Mediterranean jewel of Egypt',
+  'nile.name': 'Nile River',
+  'nile.tagline': 'Timeless journey of pharaohs',
+  'sinai.name': 'Mount Sinai',
+  'sinai.tagline': 'Sacred peaks & sunrises',
+
+  // ── Modal Tabs ─────────────────────────────────────────────────────
+  'tab.honeymoon': 'Honeymoon',
+  'tab.hotels': 'Hotels',
+  'tab.experiences': 'Experiences',
+  'tab.trips': 'Trips',
+  'tab.hotels.desc': 'Discover premium 5-star resorts and luxurious boutique hotels tailored for unparalleled comfort.',
+  'trips.subtitle': 'Unforgettable journeys and exciting daily tours.',
+
+  // ── Products ───────────────────────────────────────────────────────
+  'products.dahab.resort': 'Dahab Luxury Resort',
+  'products.dahab.resort.desc': 'Experience unparalleled luxury between the mountains and the sea in Dahab, with private beaches and world-class services.',
+  'products.dahab.diving': 'Blue Hole Diving Adventure',
+  'products.dahab.diving.desc': 'Discover the world\'s most famous dive site with professional instructors and modern equipment.',
+  'products.dahab.safari': 'Wadi el-Qunai Safari',
+  'products.dahab.safari.desc': 'A quad bike journey into the heart of the mountains to explore breathtaking nature.',
+  'products.sharm.honeymoon': 'Royal Honeymoon Package',
+  'products.sharm.honeymoon.desc': 'Romantic beach dinner, private suite, and sunset yacht cruises.',
+  'products.sharm.palace': 'Sharm El Sheikh Palace Hotel',
+  'products.sharm.palace.desc': 'A royal stay in the heart of Shark\'s Bay with panoramic views of the Red Sea.',
+  'products.hurghada.yacht': 'Private Yacht Trip in Hurghada',
+  'products.hurghada.yacht.desc': 'A full day of sailing and swimming in the most beautiful coral reef sites.',
+  'products.hurghada.marina': 'Marina El Gouna Resort',
+  'products.hurghada.marina.desc': 'Enjoy tranquility and privacy in the most prestigious neighborhood of El Gouna, Hurghada.',
+  'products.luxor.valley': 'Valley of the Kings & Queens Tour',
+  'products.luxor.valley.desc': 'A journey through time to explore the tombs of the Pharaohs and the greatness of ancient Egyptian civilization.',
+  'products.aswan.oldcataract': 'Old Cataract Aswan Hotel',
+  'products.aswan.oldcataract.desc': 'A historical stay on the banks of the Nile where Agatha Christie wrote her famous novel.',
+  'products.cairo.pyramids': 'Pyramids & Grand Museum Tour',
+  'products.cairo.pyramids.desc': 'Visit the Seven Wonders of the World and discover the treasures of Tutankhamun.',
+  'products.alex.mediterranean': 'Mediterranean Alexandria Hotel',
+  'products.alex.mediterranean.desc': 'Direct view of the sea and Alexandria Corniche with a classic luxury dinner.',
+  'products.nile.cruise': 'Royal Nile Cruise',
+  'products.nile.cruise.desc': 'Four nights of magic between Luxor and Aswan on board the most luxurious floating hotels.',
+
+  // ── Modal Items ────────────────────────────────────────────────────
+  'from': 'from',
+  'perNight': 'per night',
+  'perPerson': 'per person',
+  'perCouple': 'per couple',
+  'bookNow': 'Book Now',
+
+  // ── Map ────────────────────────────────────────────────────────────
+  'map.title': 'Find Your Paradise',
+  'map.subtitle': 'Interactive map of our exclusive destinations',
+  'map.dahabInfo':
+    'A serene coastal town renowned for its world-class windsurfing, vibrant coral reefs, and laid-back bohemian charm.',
+  'map.hurghadaInfo':
+    'A bustling resort city on the Red Sea coast, famous for its crystal-clear waters, marine life, and year-round sunshine.',
+  'map.sharmInfo':
+    'A premium resort destination nestled between the Sinai mountains and the Red Sea, offering world-class diving and luxury resorts.',
+  'map.gizaInfo': 'Home to the magnificent Great Pyramids and the timeless Sphinx. Step back 4,500 years and witness the pinnacle of ancient architectural mastery.',
+  'map.alexandriaInfo': 'The majestic Pearl of the Mediterranean. Founded by Alexander the Great, blending Greco-Roman heritage with profound seaside elegance.',
+  'map.luxorInfo': 'Often called the world\'s greatest open-air museum, filled with astonishing temples, the Valley of the Kings, and pharaonic tombs.',
+  'map.nileInfo': 'Experience the lifeblood of Egypt from the deck of a luxury cruise, drifting past ancient temples and lush riverbanks at sunset.',
+  'map.sinaiInfo': 'A deeply spiritual and rugged paradise. Ascend Mount Sinai for an iconic sunrise, followed by visits to historic desert monasteries.',
+
+  // ── Trip Builder ───────────────────────────────────────────────────
+  'tripBuilder.title': 'Build Your Dream Trip',
+  'tripBuilder.subtitle':
+    'Customize your perfect Egyptian getaway',
+  'tripBuilder.budget': 'Budget',
+  'tripBuilder.days': 'Duration',
+  'tripBuilder.daysLabel': 'days',
+  'tripBuilder.type': 'Trip Type',
+  'tripBuilder.typeAdventure': 'Adventure',
+  'tripBuilder.typeRelaxation': 'Relaxation',
+  'tripBuilder.typeCultural': 'Cultural',
+  'tripBuilder.typeHoneymoon': 'Honeymoon',
+  'tripBuilder.typeFamily': 'Family',
+  'tripBuilder.buildBtn': 'Build My Trip',
+  'tripBuilder.suggestedPlan': 'Your Suggested Plan',
+  'tripBuilder.includes': 'Includes',
+  'tripBuilder.totalPrice': 'Total Estimated Price',
+  'tripBuilder.inquire': 'Inquire Now',
+
+  // ── Experiences ────────────────────────────────────────────────────
+  'experiences.title': 'Unforgettable Experiences',
+  'experiences.subtitle':
+    'Curated activities for every type of traveler',
+  'experiences.learnMore': 'Learn More',
+  'experience.scubaDiving': 'Scuba Diving',
+  'experience.desertSafari': 'Desert Safari',
+  'experience.yachtCruise': 'Yacht Cruise',
+  'experience.culturalTours': 'Cultural Tours',
+  'experience.snorkeling': 'Snorkeling',
+  'experience.spaWellness': 'Spa & Wellness',
+  'experiences.viewMore': 'View More',
+
+  // ── Honeymoon ──────────────────────────────────────────────────────
+  'honeymoon.title': 'Begin Your Forever in Paradise',
+  'honeymoon.subtitle':
+    'Romantic getaways crafted with elegance — private beaches, sunset dinners, and unforgettable moments together.',
+  'honeymoon.cta': 'Plan Your Honeymoon',
+  'honeymoon.feature1': 'Private Beach Dinners',
+  'honeymoon.feature2': 'Luxury Couples Spa',
+  'honeymoon.feature3': 'Sunset Yacht Cruises',
+  'honeymoon.feature4': 'Personalized Itinerary',
+
+  // ── Why Us ─────────────────────────────────────────────────────────
+  'whyUs.title': 'Why Choose Dahab Dream Tour?',
+  'whyUs.subtitle':
+    'We combine local expertise with world-class service to deliver journeys that exceed your expectations.',
+  'whyUs.reason1Title': 'Expert Local Guides',
+  'whyUs.reason1Desc':
+    'Our passionate guides bring Egypt\'s history and culture to life with insider knowledge and personal stories.',
+  'whyUs.reason2Title': 'Tailor-Made Itineraries',
+  'whyUs.reason2Desc':
+    'Every trip is uniquely crafted to match your interests, pace, and travel style — no cookie-cutter packages.',
+  'whyUs.reason3Title': 'Premium Accommodations',
+  'whyUs.reason3Desc':
+    'We partner exclusively with 4- and 5-star hotels and boutique resorts that meet our exacting quality standards.',
+  'whyUs.reason4Title': '24/7 Concierge Support',
+  'whyUs.reason4Desc':
+    'From the moment you book until you return home, our dedicated team is available around the clock to assist you.',
+
+  // ── Stats ──────────────────────────────────────────────────────────
+  'stat.travelers': '5,000+',
+  'stat.travelersLabel': 'Happy Travelers',
+  'stat.rating': '4.7',
+  'stat.ratingLabel': 'Average Rating',
+  'stat.destinations': '50+',
+  'stat.destinationsLabel': 'Experiences',
+  'stat.years': '10+',
+  'stat.yearsLabel': 'Years of Excellence',
+
+  // ── Testimonials ───────────────────────────────────────────────────
+  'testimonials.title': 'What Our Travelers Say',
+  'testimonials.subtitle':
+    'Real stories from real adventurers who trusted us with their dream vacation.',
+
+  // ── Urgency ────────────────────────────────────────────────────────
+  'urgency.title': 'Limited Availability',
+  'urgency.subtitle':
+    "Don't miss out on our exclusive seasonal packages",
+  'urgency.cta': 'Reserve Your Spot Now',
+  'urgency.spotsLeft': 'Only {spots} spots left for {month}',
+
+  // ── Contact ────────────────────────────────────────────────────────
+  'contact.title': 'Start Planning Your Dream Trip',
+  'contact.subtitle':
+    'Fill out the form and our travel experts will create your perfect itinerary',
+  'contact.name': 'Your Name',
+  'contact.email': 'Email Address',
+  'contact.message': 'Your Message',
+  'contact.submit': 'Send Message',
+
+  // ── Footer ─────────────────────────────────────────────────────────
+  'footer.description':
+    'Dahab Dream Tour is your premier partner for luxury travel experiences across Egypt. We craft unforgettable journeys through the most beautiful destinations the country has to offer.',
+  'footer.quickLinks': 'Quick Links',
+  'footer.destinations': 'Destinations',
+  'footer.experiences': 'Experiences',
+  'footer.support': 'Support',
+  'footer.legal': 'Legal',
+  'footer.rights': 'All rights reserved',
+  'footer.privacy': 'Privacy Policy',
+  'footer.terms': 'Terms of Service',
+  'footer.cookies': 'Cookie Policy',
+
+  // ── WhatsApp ───────────────────────────────────────────────────────
+  'whatsapp.tooltip': 'Chat with us on WhatsApp',
+
+  // ── Search & Filter ────────────────────────────────────────────────
+  'in': 'in',
+  'search.title': 'Curated Escapes',
+  'search.subtitle': 'Find your next adventure with our curated selection of tours, hotels, and honeymoons.',
+  'search.filter': 'Filter Results',
+  'search.priceRange': 'Price Range',
+  'search.starRating': 'Star Rating',
+  'search.categories': 'Categories',
+  'search.resultsFound': '{count} experiences found',
+  'search.sortBy': 'Sort By',
+  'search.noResults': 'No experiences match your criteria.',
+  'category.all': 'All Packages',
+  'category.hotels': 'Luxury Hotels',
+  'category.honeymoon': 'Honeymoon',
+  'category.tours': 'Private Tours',
+  'filter.apply': 'Apply Filters',
+  'filter.reset': 'Reset',
+
+  // ── Product Detail Page ────────────────────────────────────────────
+  'product.duration': 'Duration',
+  'product.location': 'Location',
+  'product.guests': 'Guests',
+  'product.language': 'Language',
+  'product.languagesList': 'English, Arabic',
+  'product.bookNow': 'Book Now',
+  'product.overview': 'Overview',
+  'product.itinerary': 'Itinerary',
+  'product.includes': 'Includes',
+  'product.reviews': 'Reviews',
+  'product.startingFrom': 'Starting from',
+  'product.person': 'person',
+  'product.travelDates': 'Travel Dates',
+  'product.selectDates': 'Select Dates',
+  'product.travelers': 'Travelers',
+  'product.guestsLabel': '{count} guests',
+  'product.requestBooking': 'Request Booking',
+  'product.secureTransaction': 'Secure Transaction',
+  'product.freeCancellation': 'Free cancellation up to 48h before',
+  'product.save': 'Save',
+  'product.share': 'Share',
+  'product.experienceDetails': 'Experience Details',
+  'product.noDescription': 'No description available for this package at the moment.',
+  'product.itineraryEmpty': 'Full itinerary details will be shared upon booking.',
+  'product.day': 'Day',
+  'product.perPerson': 'per person',
+
+  // ── Admin Dashboard ────────────────────────────────────────────────
+  'admin.dashboard': 'Dashboard',
+  'admin.bookings': 'Bookings',
+  'admin.destinations': 'Destinations',
+  'admin.packages': 'Packages',
+  'admin.users': 'Users',
+  'admin.settings': 'Settings',
+  'admin.totalRevenue': 'Total Revenue',
+  'admin.activeBookings': 'Active Bookings',
+  'admin.totalUsers': 'Total Users',
+  'admin.recentInquiries': 'Recent Inquiries',
+  'admin.viewAll': 'View All',
+  'admin.status': 'Status',
+  'admin.date': 'Date',
+  'admin.amount': 'Amount',
+  'admin.customer': 'Customer',
+  'admin.pending': 'Pending',
+  'admin.confirmed': 'Confirmed',
+  'admin.cancelled': 'Cancelled',
+  'admin.revenueChart': 'Revenue Overview',
+};
+
+export default en;
