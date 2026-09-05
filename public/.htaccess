@@ -1,0 +1,24 @@
+Options -MultiViews
+RewriteEngine On
+
+# Handle Next.js static export routing — serve HTML shells for dynamic segments
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Dynamic product pages → serve /product/view/index.html shell
+RewriteRule ^product/([^/]+)(/?)$ /product/view/index.html [L]
+
+# Dynamic offers pages — common categories are pre-built
+# If category doesn't exist on disk, fall back to /offers/trips
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^offers/([^/]+)(/?)$ /offers/trips/index.html [L]
+
+# Dynamic experience pages → serve /experiences/view/index.html shell
+RewriteRule ^experiences/([^/]+)(/?)$ /experiences/view/index.html [L]
+
+# Dynamic booking-details pages → serve /booking-details/view/index.html shell
+RewriteRule ^booking-details/([^/]+)(/?)$ /booking-details/view/index.html [L]
+
+# Fallback: serve index.html for unknown paths (SPA behavior)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.html [L]

@@ -16,35 +16,78 @@ const en = {
   'nav.language': 'Language',
   'brand.name': 'Dahab Dream Tour',
 
+  // ── Search Page ────────────────────────────────────────────────────
+  'search.title': 'Curated Escapes',
+  'search.subtitle': 'Find your next adventure with our curated selection of tours, hotels, and honeymoons.',
+  'search.filter': 'Filter Results',
+  'search.noResults': 'No results found',
+  'search.placeholder': 'Search by destination or experience...',
+  'search.reset': 'Reset',
+  'search.sort.featured': 'Featured',
+  'search.sort.priceLow': 'Price: Low to High',
+  'search.sort.priceHigh': 'Price: High to Low',
+  'search.sort.rating': 'Top Rated',
+  'search.category.all': 'All Packages',
+  'search.category.honeymoon': 'Honeymoon',
+  'search.category.hotels': 'Hotels',
+  'search.category.experiences': 'Experiences',
+  'search.category.trips': 'Trips',
+  'search.loading': 'Discovering experiences...',
+
+  // ── Filter Sidebar ────────────────────────────────────────────
+  'filter.reset': 'Reset',
+  'search.categories': 'Categories',
+  'search.priceRange': 'Price Range',
+  'search.starRating': 'Star Rating',
+  'category.all': 'All Packages',
+  'category.honeymoon': 'Honeymoon',
+  'category.hotels': 'Hotels',
+  'category.experiences': 'Experiences',
+  'category.trips': 'Trips',
+  'category.tours': 'Tours',
+  'category.diving-marine': 'Diving & Marine',
+
+  // ── Offers Page ───────────────────────────────────────────────────
+  'offers.filter': 'Filters',
+  'offers.filterTitle': 'Filter Search Results',
+  'offers.activeFilters': 'Active Filters:',
+  'offers.resetAll': 'Reset All Filters',
+  'offers.noResults': 'No offers matching your search',
+  'offers.noResultsDesc': 'Try adjusting your search criteria or resetting filters.',
+  'offers.showAll': 'Show All Offers',
+  'offers.prev': 'Previous',
+  'offers.next': 'Next',
+  'offers.showing': 'Showing',
+  'offers.of': 'of',
+  'offers.results': 'offers',
+  'offers.sort.featured': 'Featured',
+  'offers.sort.priceLow': 'Price: Low to High',
+  'offers.sort.priceHigh': 'Price: High to Low',
+  'offers.sort.rating': 'Top Rated',
+  'offers.loading': 'Loading luxury offers...',
+  'offers.home': 'Home',
+
   // ── Hero ───────────────────────────────────────────────────────────
   'hero.tagline': 'Luxury Egyptian Travel Experiences',
   'hero.headline': 'Discover Egypt Like Never Before',
-  'hero.headline.giza': 'The Majesty of Giza',
-  'hero.headline.dahab': 'The Golden Sands of Dahab',
-  'hero.headline.hurghada': 'Red Sea Paradise',
-  'hero.headline.sharm': 'Pearl of the Sinai',
-  'hero.headline.luxor': 'City of Pharaohs',
-  'hero.headline.alexandria': 'Mediterranean Jewel',
-  'hero.headline.nile': 'The Eternal Nile',
-  'hero.headline.sinai': 'Sacred Peaks',
+  'hero.headline.giza': 'Pyramids',
+  'hero.headline.dahab': 'Dahab',
+  'hero.headline.sharm': 'Sharm El Sheikh',
+  'hero.headline.hurghada': 'Hurghada',
+  'hero.headline.luxor': 'Luxor',
+  'hero.headline.aswan': 'Aswan',
+  'hero.headline.siwa': 'Siwa Oasis',
+  'hero.headline.whiteDesert': 'White Desert',
   'hero.subheadline':
     'From the golden shores of Dahab to the vibrant reefs of the Red Sea — curated luxury journeys tailored to your dreams.',
-  'hero.subheadline.giza':
-    'Stand before the timeless Great Pyramids of Giza — where ancient pharaohs built monuments that have endured for over 4,500 years.',
-  'hero.subheadline.dahab':
-    'Dive into the crystal-clear waters of the Blue Hole, where desert mountains meet the most vibrant coral reefs in the world.',
-  'hero.subheadline.hurghada':
-    'Experience the ultimate Red Sea paradise — luxury resorts, pristine beaches, and world-class diving await you.',
-  'hero.subheadline.sharm':
-    'Discover Sharm El Sheikh, where the Sinai mountains meet turquoise waters — a playground for divers and luxury seekers.',
-  'hero.subheadline.luxor':
-    'Walk through the Valley of the Kings and ancient temples of Luxor — where the glory of pharaohs comes alive.',
-  'hero.subheadline.alexandria':
-    'Explore the Mediterranean jewel of Alexandria — where ancient history and modern elegance meet at the sea.',
-  'hero.subheadline.nile':
-    'Sail the legendary Nile River at sunset — a timeless journey through the heart of ancient Egyptian civilization.',
-  'hero.subheadline.sinai':
-    'Ascend the sacred peaks of Mount Sinai — where breathtaking sunrises and spiritual serenity await.',
+  'hero.subheadline.giza': 'The timeless grandeur of Ancient Egypt, with the iconic pyramids rising from the desert.',
+  'hero.subheadline.dahab': 'Crystal-clear turquoise waters, Sinai mountains, and a peaceful atmosphere you’ll never forget.',
+  'hero.subheadline.sharm': 'Stunning beaches and crystal-clear waters in one of the Red Sea’s most beautiful destinations.',
+  'hero.subheadline.hurghada': 'Turquoise seas and breathtaking coral reefs, perfect for sea lovers and adventure seekers.',
+  'hero.subheadline.luxor': 'A journey through history among magnificent temples and legendary Pharaonic treasures.',
+  'hero.subheadline.aswan': 'The beauty of the Nile, peaceful landscapes, and the authentic charm of Nubian culture.',
+  'hero.subheadline.siwa': 'A magical oasis of palm trees, lakes, and natural springs in the heart of the desert.',
+  'hero.subheadline.whiteDesert': 'A surreal world of white rock formations in one of Egypt’s most spectacular deserts.',
   'hero.cta': 'Plan My Trip',
   'hero.secondaryCta': 'Explore Destinations',
   'hero.rating': 'Rated 4.7/5 by travelers',
@@ -119,6 +162,7 @@ const en = {
   // ── Map ────────────────────────────────────────────────────────────
   'map.title': 'Find Your Paradise',
   'map.subtitle': 'Interactive map of our exclusive destinations',
+  'map.description': 'Explore our exclusive travel destinations. Click any point to open booking options and services directly.',
   'map.dahabInfo':
     'A serene coastal town renowned for its world-class windsurfing, vibrant coral reefs, and laid-back bohemian charm.',
   'map.hurghadaInfo':
@@ -150,10 +194,12 @@ const en = {
   'tripBuilder.totalPrice': 'Total Estimated Price',
   'tripBuilder.inquire': 'Inquire Now',
 
-  // ── Experiences ────────────────────────────────────────────────────
-  'experiences.title': 'Unforgettable Experiences',
-  'experiences.subtitle':
-    'Curated activities for every type of traveler',
+  // ── Experiences & Articles ──────────────────────────────────────────
+  'experiences.title': 'Travel Articles & Experiences',
+  'experiences.subtitle': 'Engaging travel stories, guides, and real traveler experiences across top destinations',
+  'experience.title': 'Travel Articles & Experiences',
+  'experience.subtitle': 'Engaging travel stories, guides, and real traveler experiences across top destinations',
+  'experience.readArticle': 'Read Article',
   'experiences.learnMore': 'Learn More',
   'experience.scubaDiving': 'Scuba Diving',
   'experience.desertSafari': 'Desert Safari',
@@ -218,8 +264,20 @@ const en = {
     'Fill out the form and our travel experts will create your perfect itinerary',
   'contact.name': 'Your Name',
   'contact.email': 'Email Address',
+  'contact.phone': 'Phone / WhatsApp',
+  'contact.adults': 'Adults (18+)',
+  'contact.children': 'Children (0-17)',
+  'contact.nights': 'Number of Nights',
+  'contact.startDate': 'Start / Check-in Date',
+  'contact.endDate': 'End / Check-out Date',
+  'contact.durationMode': 'Duration Input Option',
+  'contact.modeDates': 'Select Check-in & Check-out Dates (Auto-calculated Nights)',
+  'contact.modeNights': 'Specify Number of Nights & Start Date',
   'contact.message': 'Your Message',
   'contact.submit': 'Send Message',
+  'filter.from': 'Check-in Date',
+  'filter.to': 'Check-out Date',
+  'product.phone': 'Phone Number',
 
   // ── Footer ─────────────────────────────────────────────────────────
   'footer.description':
@@ -239,21 +297,9 @@ const en = {
 
   // ── Search & Filter ────────────────────────────────────────────────
   'in': 'in',
-  'search.title': 'Curated Escapes',
-  'search.subtitle': 'Find your next adventure with our curated selection of tours, hotels, and honeymoons.',
-  'search.filter': 'Filter Results',
-  'search.priceRange': 'Price Range',
-  'search.starRating': 'Star Rating',
-  'search.categories': 'Categories',
   'search.resultsFound': '{count} experiences found',
   'search.sortBy': 'Sort By',
-  'search.noResults': 'No experiences match your criteria.',
-  'category.all': 'All Packages',
-  'category.hotels': 'Luxury Hotels',
-  'category.honeymoon': 'Honeymoon',
-  'category.tours': 'Private Tours',
   'filter.apply': 'Apply Filters',
-  'filter.reset': 'Reset',
 
   // ── Product Detail Page ────────────────────────────────────────────
   'product.duration': 'Duration',
@@ -271,6 +317,8 @@ const en = {
   'product.travelDates': 'Travel Dates',
   'product.selectDates': 'Select Dates',
   'product.travelers': 'Travelers',
+  'product.adults': 'Adults',
+  'product.children': 'Children',
   'product.guestsLabel': '{count} guests',
   'product.requestBooking': 'Request Booking',
   'product.secureTransaction': 'Secure Transaction',

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Users, 
@@ -11,9 +12,11 @@ import {
   MoreVertical,
   CheckCircle2,
   Clock,
-  XCircle
+  XCircle,
+  RefreshCw
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
+import { apiService, Booking, DashboardOverview } from '@/services/api';
 import {
   AreaChart,
   Area,
@@ -24,8 +27,8 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-/* ── Mock Data ────────────────────────────────────────── */
-const revenueData = [
+/* ── Fallback Revenue Chart Data ── */
+const fallbackRevenueData = [
   { name: 'Jan', total: 4000 },
   { name: 'Feb', total: 3000 },
   { name: 'Mar', total: 5000 },
@@ -35,21 +38,52 @@ const revenueData = [
   { name: 'Jul', total: 7000 },
 ];
 
-const recentInquiries = [
-  { id: 'BKG-762931', customer: 'Ahmed Hassan', package: 'Royal Honeymoon Package', amount: '$2,400', date: '2025-06-12', status: 'confirmed' },
-  { id: 'BKG-192834', customer: 'Sarah Miller', package: 'Pyramids & Grand Museum Tour', amount: '$350', date: '2025-06-11', status: 'pending' },
-  { id: 'BKG-548123', customer: 'Khaled Omar', package: 'Dahab Luxury Resort', amount: '$1,200', date: '2025-06-10', status: 'confirmed' },
-  { id: 'BKG-992145', customer: 'Emma Watson', package: 'Private Yacht Trip', amount: '$800', date: '2025-06-09', status: 'cancelled' },
-  { id: 'BKG-441239', customer: 'Ali Rahman', package: 'Old Cataract Aswan', amount: '$1,500', date: '2025-06-08', status: 'pending' },
-];
-
 export default function AdminDashboard() {
-  const { t, dir } = useI18n();
+  const { t } = useI18n();
+  const [loading, setLoading] = useState(true);
+  const [overview, setOverview] = useState<DashboardOverview | null>(null);
+  const [recentBookings, setRecentBookings] = useState<Booking[]>([]);
+  const [chartData, setChartData] = useState<any[]>(fallbackRevenueData);
+
+  const fetchDashboardData = async () => {
+    setLoading(true);
+    try {
+      // Fetch overview stats
+      const overviewRes = await apiService.admin.dashboard.getOverview();
+      if (overviewRes?.success && overviewRes.data) {
+        setOverview(overviewRes.data);
+      }
+
+      // Fetch recent bookings
+      const bookingsRes = await apiService.admin.dashboard.getRecentBookings();
+      if (bookingsRes?.success && bookingsRes.data) {
+        setRecentBookings(bookingsRes.data);
+      }
+
+      // Fetch revenue chart
+      const chartRes = await apiService.admin.dashboard.getRevenueChart('month', 7);
+      if (chartRes?.success && Array.isArray(chartRes.data) && chartRes.data.length > 0) {
+        const formatted = chartRes.data.map((item: any) => ({
+          name: item.period || item.month || 'Data',
+          total: item.total_revenue || item.net_revenue || 0,
+        }));
+        setChartData(formatted);
+      }
+    } catch (err) {
+      console.warn('Dashboard API using fallback data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
 
   const stats = [
     {
       title: t('admin.totalRevenue'),
-      value: '$45,231.89',
+      value: overview ? `$${overview.total_revenue.toLocaleString()}` : '$45,231.89',
       trend: '+20.1%',
       trendUp: true,
       icon: CreditCard,
@@ -58,7 +92,7 @@ export default function AdminDashboard() {
     },
     {
       title: t('admin.activeBookings'),
-      value: '+2350',
+      value: overview ? `${overview.total_bookings}` : '2,350',
       trend: '+15.2%',
       trendUp: true,
       icon: CalendarCheck,
@@ -67,7 +101,7 @@ export default function AdminDashboard() {
     },
     {
       title: t('admin.totalUsers'),
-      value: '12,234',
+      value: overview ? `${overview.total_users}` : '12,234',
       trend: '+5.4%',
       trendUp: true,
       icon: Users,
@@ -76,7 +110,7 @@ export default function AdminDashboard() {
     },
     {
       title: 'Conversion Rate',
-      value: '4.3%',
+      value: overview ? `${overview.conversion_rate}%` : '4.3%',
       trend: '-1.2%',
       trendUp: false,
       icon: TrendingUp,
@@ -88,6 +122,7 @@ export default function AdminDashboard() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'confirmed':
+      case 'completed':
         return (
           <div className="flex w-24 items-center justify-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-bold text-emerald-400 border border-emerald-500/20">
             <CheckCircle2 className="size-3" />
@@ -101,6 +136,7 @@ export default function AdminDashboard() {
             {t('admin.pending')}
           </div>
         );
+      case 'canceled':
       case 'cancelled':
         return (
           <div className="flex w-24 items-center justify-center gap-1.5 rounded-full bg-rose-500/10 px-2.5 py-1 text-xs font-bold text-rose-400 border border-rose-500/20">
@@ -109,16 +145,30 @@ export default function AdminDashboard() {
           </div>
         );
       default:
-        return null;
+        return (
+          <div className="flex w-24 items-center justify-center gap-1.5 rounded-full bg-slate-500/10 px-2.5 py-1 text-xs font-bold text-slate-300 border border-slate-500/20">
+            {status}
+          </div>
+        );
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white">{t('admin.dashboard')}</h1>
-        <p className="text-slate-400 mt-1">Overview of your travel business performance.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-white">{t('admin.dashboard')}</h1>
+          <p className="text-slate-400 mt-1">Overview of your travel business performance.</p>
+        </div>
+        <button
+          onClick={fetchDashboardData}
+          disabled={loading}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition-all cursor-pointer"
+        >
+          <RefreshCw className={`size-4 ${loading ? 'animate-spin' : ''}`} />
+          Refresh
+        </button>
       </div>
 
       {/* Stats Grid */}
@@ -172,7 +222,7 @@ export default function AdminDashboard() {
           </div>
           <div className="h-[300px] w-full" dir="ltr">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={revenueData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+              <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#00D4FF" stopOpacity={0.3}/>
@@ -228,19 +278,23 @@ export default function AdminDashboard() {
           
           <div className="flex-1 overflow-auto pr-2 no-scrollbar">
             <div className="space-y-4">
-              {recentInquiries.map((inq) => (
-                <div key={inq.id} className="flex items-center justify-between rounded-xl border border-white/5 bg-white/5 p-4 transition-colors hover:bg-white/10">
-                  <div className="flex flex-col gap-1">
-                    <span className="font-bold text-white">{inq.customer}</span>
-                    <span className="text-xs text-slate-400">{inq.package}</span>
-                    <span className="text-xs font-mono text-cyan/70 mt-1">{inq.id}</span>
+              {recentBookings.length > 0 ? (
+                recentBookings.slice(0, 5).map((booking) => (
+                  <div key={booking.id} className="flex items-center justify-between rounded-xl border border-white/5 bg-white/5 p-4 transition-colors hover:bg-white/10">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-bold text-white">{booking.customer_name}</span>
+                      <span className="text-xs text-slate-400">{booking.items?.[0]?.title || 'Package Booking'}</span>
+                      <span className="text-xs font-mono text-cyan/70 mt-1">{booking.reference_number}</span>
+                    </div>
+                    <div className="flex flex-col items-end gap-2">
+                      <span className="font-bold text-white">${booking.total_amount}</span>
+                      {getStatusBadge(booking.status)}
+                    </div>
                   </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <span className="font-bold text-white">{inq.amount}</span>
-                    {getStatusBadge(inq.status)}
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-slate-400 text-sm text-center py-8">No recent bookings available</p>
+              )}
             </div>
           </div>
         </motion.div>
@@ -272,17 +326,25 @@ export default function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {recentInquiries.map((row, index) => (
-                <tr key={index} className="border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors">
-                  <td className="px-6 py-4 font-medium text-white">{row.customer}</td>
-                  <td className="px-6 py-4">{row.package}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-slate-400">{row.date}</td>
-                  <td className="px-6 py-4 font-mono text-cyan">{row.amount}</td>
-                  <td className="px-6 py-4">
-                    {getStatusBadge(row.status)}
+              {recentBookings.length > 0 ? (
+                recentBookings.map((row) => (
+                  <tr key={row.id} className="border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors">
+                    <td className="px-6 py-4 font-medium text-white">{row.customer_name}</td>
+                    <td className="px-6 py-4">{row.items?.[0]?.title || 'Package Trip'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-slate-400">{row.check_in_date || row.created_at?.split('T')[0] || '-'}</td>
+                    <td className="px-6 py-4 font-mono text-cyan">${row.total_amount}</td>
+                    <td className="px-6 py-4">
+                      {getStatusBadge(row.status)}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="text-center py-6 text-slate-400">
+                    No transactions found
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

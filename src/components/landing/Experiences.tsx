@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Anchor,
@@ -10,88 +12,95 @@ import {
   Fish,
   Sparkles,
   ArrowRight,
+  MapPin,
+  BookOpen
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
+import { apiService, Service } from "@/services/api";
 
-/* ── Data ──────────────────────────────────────────────────────────────────── */
-
-const experiences = [
+const defaultExperiences = [
   {
-    id: "diving",
+    id: 1,
     nameKey: "experience.scubaDiving",
+    title: "مغامرات الغوص وسحر الشعاب المرجانية في البحر الأحمر",
     image: "/images/experience-diving.png",
-    desc: "Explore vibrant coral reefs and encounter majestic marine life in the crystal-clear waters of the Red Sea.",
+    desc: "اقرأ عن تجارب واستكشاف أعماق البحر الأحمر، وأهم النصائح للغواصين المبتدئين والمحترفين في دهب وشرم الشيخ.",
+    location: "دهب وشرم الشيخ",
     icon: Anchor,
   },
   {
-    id: "desert",
+    id: 2,
     nameKey: "experience.desertSafari",
+    title: "سحر الصحراء والنجوم الساطعة في سيناء",
     image: "/images/experience-desert.png",
-    desc: "Ride through golden sand dunes, discover hidden oases, and witness breathtaking desert sunsets.",
+    desc: "دليل شامل لتجارب السفر في الصحراء، ركوب الدراجات الرباعية، وسهرات الجلسات البدوية تحت أضواء النجوم.",
+    location: "صحراء سيناء",
     icon: Compass,
   },
   {
-    id: "yacht",
+    id: 3,
     nameKey: "experience.yachtCruise",
+    title: "رحلات اليخوت الفاخرة ومواقع السباحة البكر",
     image: "/images/experience-yacht.png",
-    desc: "Sail along the stunning Red Sea coastline on a private luxury yacht with gourmet dining.",
+    desc: "تجارب الإبحار الخاص في البحر الأحمر، استكشاف الجزر النائية وأجمل الجولات البحرية عند غروب الشمس.",
+    location: "الغردقة والجونة",
     icon: Ship,
   },
   {
-    id: "culture",
+    id: 4,
     nameKey: "experience.culturalTours",
+    title: "أسرار الفراعنة وعظمة التاريخ في الأقصر وأسوان",
     image: "/images/experience-culture.png",
-    desc: "Discover ancient Egyptian temples, historic sites, and immerse yourself in rich cultural heritage.",
+    desc: "مقالة تفصيلية عن زيارة المقابر الفرعونية ومعابد الكرنك وفيلة، وأفضل الأوقات لالتقاط أروع الصور التذكارية.",
+    location: "الأقصر وأسوان",
     icon: Landmark,
   },
   {
-    id: "snorkeling",
+    id: 5,
     nameKey: "experience.snorkeling",
+    title: "عالم الألوان تحت الماء في الثقب الأزرق",
     image: "/images/experience-snorkeling.png",
-    desc: "Swim among colorful tropical fish and explore shallow coral gardens perfect for all skill levels.",
+    desc: "نصائح وإرشادات للسباحة والغطس السطحي بين الأسماك الاستوائية والشعاب المرجانية في محميات سيناء.",
+    location: "دهب - Blue Hole",
     icon: Fish,
   },
   {
-    id: "spa",
+    id: 6,
     nameKey: "experience.spaWellness",
+    title: "الاسترخاء والرفاهية الصحية على شواطئ البحر",
     image: "/images/experience-spa.png",
-    desc: "Indulge in world-class spa treatments with ocean views and holistic wellness programs.",
+    desc: "تجربة التعافي والاستجمام الطبيعي، وجلسات السبا المميزة مع إطلالات بانورامية ساحرة على البحر.",
+    location: "منتجعات سيناء",
     icon: Sparkles,
   },
 ];
 
-/* ── Animation variants ────────────────────────────────────────────────────── */
-
-const sectionFade = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
-  },
-};
-
-const cardReveal = {
-  hidden: { opacity: 0, y: 50, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.65,
-      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-    },
-  },
-};
-
-
 export default function Experiences() {
-  const { t } = useI18n();
+  const { t, lang, dir } = useI18n();
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPublicServices() {
+      setLoading(true);
+      try {
+        const res = await apiService.public.services.index({ per_page: 6 });
+        if (res?.data && res.data.length > 0) {
+          setServices(res.data);
+        }
+      } catch (err) {
+        console.warn("Failed to fetch public services for experiences section");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPublicServices();
+  }, [lang]);
 
   return (
     <section
       id="experiences"
-      className="relative overflow-hidden py-[var(--section-spacing)] px-[var(--container-padding)]"
+      className="relative overflow-hidden py-16 md:py-24 px-4 sm:px-6 lg:px-12"
     >
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section header */}
@@ -103,94 +112,128 @@ export default function Experiences() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4 py-2">
-            {t("experiences.title")}
+            {t("experience.title")}
           </h2>
-          <p className="mx-auto max-w-2xl text-slate-400">
-            {t("experiences.subtitle")}
+          <p className="mx-auto max-w-2xl text-slate-400 text-sm sm:text-base">
+            {t("experience.subtitle")}
           </p>
         </motion.div>
 
-        {/* Experience cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {experiences.map((exp, i) => (
-            <ExperienceCard key={exp.id} experience={exp} index={i} />
-          ))}
-        </div>
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.length > 0
+            ? services.map((srv, i) => {
+                const title = srv.name_translations?.[lang] || srv.name;
+                const desc = srv.short_description_translations?.[lang] || srv.description_translations?.[lang] || srv.short_description || srv.description || title;
+                const cover = srv.cover_url || defaultExperiences[i % defaultExperiences.length].image;
+                const tag = srv.address || srv.destination?.name || srv.category?.name || 'تجارب وقصص السفر';
 
-        {/* View More Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 flex justify-center"
-        >
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full border-cyan/30 px-10 py-6 text-cyan hover:bg-cyan/10"
-          >
-            {t("experiences.viewMore")}
-            <ArrowRight className="ml-2 size-5" />
-          </Button>
-        </motion.div>
+                return (
+                  <motion.div
+                    key={srv.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.08 }}
+                  >
+                    <Link
+                      href={`/experiences/${srv.id}`}
+                      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-navy/80 p-6 shadow-xl backdrop-blur-xl transition-all duration-500 hover:border-cyan/40 hover:-translate-y-2 h-full"
+                    >
+                      <div>
+                        {/* Image Container */}
+                        <div className="relative h-52 w-full overflow-hidden rounded-2xl mb-4 bg-navy-light">
+                          <Image
+                            src={cover}
+                            alt={title}
+                            fill
+                            unoptimized
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent" />
+                          <div className="absolute top-3 left-3">
+                            <span className="rounded-full bg-navy/80 border border-cyan/30 px-3 py-1 text-xs font-bold text-cyan backdrop-blur-md flex items-center gap-1">
+                              <MapPin className="size-3 text-cyan" />
+                              {tag}
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold text-white group-hover:text-cyan transition-colors mb-2.5 line-clamp-2 leading-snug">
+                          {title}
+                        </h3>
+                        <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed mb-4">
+                          {desc}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-auto">
+                        <span className="text-xs font-bold text-slate-400 group-hover:text-cyan transition-colors">
+                          {lang === 'ar' ? 'مقالة مفصلة' : 'Travel Article'}
+                        </span>
+                        <span className="flex items-center gap-1.5 text-xs font-extrabold text-cyan group-hover:text-white transition-colors bg-cyan/10 px-3 py-1.5 rounded-xl border border-cyan/20">
+                          <span>{t("experience.readArticle") || (lang === 'ar' ? 'اقرأ المقال' : 'Read Article')}</span>
+                          <ArrowRight className={`size-3.5 transition-transform ${dir === 'rtl' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })
+            : defaultExperiences.map((exp, i) => {
+                const Icon = exp.icon;
+                return (
+                  <motion.div
+                    key={exp.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.08 }}
+                  >
+                    <Link
+                      href={`/experiences/${exp.id}`}
+                      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-navy/80 p-6 shadow-xl backdrop-blur-xl transition-all duration-500 hover:border-cyan/40 hover:-translate-y-2 h-full"
+                    >
+                      <div>
+                        <div className="relative h-52 w-full overflow-hidden rounded-2xl mb-4 bg-navy-light">
+                          <Image
+                            src={exp.image}
+                            alt={exp.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent" />
+                          <div className="absolute top-3 left-3">
+                            <span className="rounded-full bg-navy/80 border border-cyan/30 px-3 py-1 text-xs font-bold text-cyan backdrop-blur-md flex items-center gap-1">
+                              <MapPin className="size-3 text-cyan" />
+                              {exp.location}
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold text-white group-hover:text-cyan transition-colors mb-2.5 line-clamp-2 leading-snug">
+                          {exp.title}
+                        </h3>
+                        <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed mb-4">
+                          {exp.desc}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-auto">
+                        <span className="text-xs font-bold text-slate-400 group-hover:text-cyan transition-colors">
+                          {lang === 'ar' ? 'مقالة مفصلة' : 'Travel Article'}
+                        </span>
+                        <span className="flex items-center gap-1.5 text-xs font-extrabold text-cyan group-hover:text-white transition-colors bg-cyan/10 px-3 py-1.5 rounded-xl border border-cyan/20">
+                          <span>{t("experience.readArticle") || (lang === 'ar' ? 'اقرأ المقال' : 'Read Article')}</span>
+                          <ArrowRight className={`size-3.5 transition-transform ${dir === 'rtl' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function ExperienceCard({
-  experience,
-  index,
-}: {
-  experience: (typeof experiences)[number];
-  index: number;
-}) {
-  const { t } = useI18n();
-  const Icon = experience.icon;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="group relative flex flex-col bg-white/5 rounded-3xl overflow-hidden border border-white/10 hover:border-cyan/30 transition-all duration-500 hover:-translate-y-2"
-    >
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <Image
-          src={experience.image}
-          alt={t(experience.nameKey)}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <div className="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition-colors" />
-        <div className="absolute top-4 left-4 flex items-center gap-2 bg-navy/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-          <Icon className="size-4 text-cyan" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-white">
-            {t(experience.nameKey)}
-          </span>
-        </div>
-      </div>
-
-      <div className="p-8 flex flex-col flex-1">
-        <h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan transition-colors">
-          {t(experience.nameKey)}
-        </h3>
-        <p className="text-sm text-slate-400 mb-8 flex-1 leading-relaxed">
-          {experience.desc}
-        </p>
-        
-        <div className="flex items-center justify-between pt-6 border-t border-white/10">
-          <span className="text-xs font-bold text-cyan uppercase tracking-wider">
-            {t("experiences.learnMore")}
-          </span>
-          <div className="size-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-cyan transition-all">
-            <ArrowRight className="size-4 text-white group-hover:text-navy transition-transform group-hover:-rotate-45" />
-          </div>
-        </div>
-      </div>
-    </motion.div>
   );
 }

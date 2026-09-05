@@ -4,7 +4,7 @@ import Navbar from '@/components/landing/Navbar'
 import Hero from '@/components/landing/Hero'
 import Destinations from '@/components/landing/Destinations'
 
-// Dynamically import below-the-fold components to split the JS bundle
+// Dynamically import below-the-fold components to split the JS bundle & boost initial load speed
 const InteractiveMap = dynamic(() => import('@/components/landing/InteractiveMap'))
 const Experiences = dynamic(() => import('@/components/landing/Experiences'))
 const Honeymoon = dynamic(() => import('@/components/landing/Honeymoon'))
@@ -13,7 +13,7 @@ const Testimonials = dynamic(() => import('@/components/landing/Testimonials'))
 const Contact = dynamic(() => import('@/components/landing/Contact'))
 const Footer = dynamic(() => import('@/components/landing/Footer'))
 
-// No SSR constraint
+// Floating widgets
 const WhatsAppButton = dynamic(() => import('@/components/landing/WhatsAppButton'))
 
 import { Toaster } from '@/components/ui/sonner'

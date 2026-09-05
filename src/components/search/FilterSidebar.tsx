@@ -18,7 +18,7 @@ interface FilterSidebarProps {
   onReset: () => void
 }
 
-const CATEGORIES = ['all', 'hotels', 'honeymoon', 'tours']
+const CATEGORIES = ['all', 'honeymoon', 'hotels', 'experiences', 'trips']
 
 export default function FilterSidebar({
   priceRange,
@@ -83,8 +83,8 @@ export default function FilterSidebar({
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder={t('nav.search') + "..."}
-          className={`w-full h-12 bg-white/[0.02] border border-white/10 rounded-xl ${dir === 'rtl' ? 'pr-11 pl-10' : 'pl-11 pr-10'} text-white text-sm font-medium outline-none focus:border-cyan/20 focus:bg-white/[0.04] transition-all placeholder:text-slate-600`}
+          placeholder={dir === 'rtl' ? 'ابحث باسم العرض أو الوجهة...' : 'Search by offer or destination...'}
+          className={`w-full h-12 bg-white/[0.02] border border-white/10 rounded-xl ${dir === 'rtl' ? 'pr-11 pl-10' : 'pl-11 pr-10'} text-white text-sm font-medium outline-none focus:border-cyan/20 focus:bg-white/[0.04] transition-all placeholder:text-slate-500`}
         />
         {searchQuery && (
           <button 
@@ -96,31 +96,7 @@ export default function FilterSidebar({
         )}
       </div>
 
-      <Accordion type="multiple" defaultValue={['categories', 'price', 'rating']} className="space-y-2">
-        {/* Categories */}
-        <AccordionItem value="categories" className="border-none">
-          <AccordionTrigger className="py-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white hover:no-underline transition-colors">
-            {t('search.categories')}
-          </AccordionTrigger>
-          <AccordionContent className="pt-2">
-            <div className="flex flex-col gap-1.5">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => toggleCategory(cat)}
-                  className={`flex items-center justify-between rounded-xl px-4 py-3.5 transition-all ${
-                    isCategorySelected(cat)
-                      ? 'bg-cyan/10 text-cyan border border-cyan/20'
-                      : 'bg-white/[0.01] border border-white/[0.03] text-slate-500 hover:bg-white/[0.03] hover:text-white'
-                  }`}
-                >
-                  <span className="text-[11px] font-bold uppercase tracking-wider">{t(`category.${cat}`)}</span>
-                  {isCategorySelected(cat) && <Check className="size-3.5 stroke-[3px]" />}
-                </button>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+      <Accordion type="multiple" defaultValue={['price', 'rating']} className="space-y-2">
 
         {/* Price */}
         <AccordionItem value="price" className="border-none">
@@ -142,7 +118,7 @@ export default function FilterSidebar({
             <Slider.Root
               className="relative flex h-5 w-full touch-none select-none items-center"
               value={priceRange}
-              max={2000}
+              max={5000}
               step={50}
               onValueChange={(val) => setPriceRange(val as [number, number])}
             >
@@ -175,8 +151,7 @@ export default function FilterSidebar({
                   <div className="flex items-center gap-3">
                     <Checkbox
                       checked={selectedRatings.includes(rating)}
-                      onCheckedChange={() => toggleRating(rating)}
-                      className="size-5 border-white/20 data-[state=checked]:bg-cyan data-[state=checked]:border-cyan rounded-lg"
+                      className="size-5 border-white/20 data-[state=checked]:bg-cyan data-[state=checked]:border-cyan rounded-lg pointer-events-none"
                     />
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (

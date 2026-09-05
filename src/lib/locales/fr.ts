@@ -15,24 +15,24 @@ const fr = {
   // ── Hero ───────────────────────────────────────────────────────────
   'hero.tagline': 'Voyages de luxe en Égypte',
   'hero.headline': 'Découvrez l\'Égypte comme jamais',
+  'hero.headline.giza': 'Pyramides',
+  'hero.headline.dahab': 'Dahab',
+  'hero.headline.sharm': 'Sharm El Sheikh',
+  'hero.headline.hurghada': 'Hurghada',
+  'hero.headline.luxor': 'Louxor',
+  'hero.headline.aswan': 'Assouan',
+  'hero.headline.siwa': 'Oasis de Siwa',
+  'hero.headline.whiteDesert': 'Désert Blanc',
   'hero.subheadline':
     'Des côtes dorées de Dahab aux récifs vibrants de la mer Rouge — des voyages de luxe sur mesure conçus pour vos rêves.',
-  'hero.subheadline.giza':
-    'Contemplez les majestueuses Pyramides de Gizeh — où les anciens pharaons ont érigé des monuments qui perdurent depuis plus de 4 500 ans.',
-  'hero.subheadline.dahab':
-    'Plongez dans les eaux cristallines du Blue Hole, où les montagnes du désert rencontrent les récifs coralliens les plus vibrants au monde.',
-  'hero.subheadline.hurghada':
-    'Vivez le paradis ultime de la mer Rouge — complexes de luxe, plages immaculées et plongée de classe mondiale vous attendent.',
-  'hero.subheadline.sharm':
-    'Découvrez Sharm El Sheikh, où les montagnes du Sinaï rencontrent les eaux turquoise — un terrain de jeu pour plongeurs et amateurs de luxe.',
-  'hero.subheadline.luxor':
-    'Promenez-vous dans la Vallée des Rois et les temples antiques de Louxor — où la gloire des pharaons prend vie.',
-  'hero.subheadline.alexandria':
-    'Explorez le joyau méditerranéen d\'Alexandrie — où l\'histoire ancienne et l\'élégance moderne se rencontrent sur la mer.',
-  'hero.subheadline.nile':
-    'Naviguez sur le légendaire Nil au coucher du soleil — un voyage intemporel au cœur de la civilisation égyptienne antique.',
-  'hero.subheadline.sinai':
-    'Gravissez les sommets sacrés du mont Sinaï — où des levers de soleil époustouflants et la sérénité spirituelle vous attendent.',
+  'hero.subheadline.giza': 'La grandeur intemporelle de l’Égypte ancienne, avec les pyramides emblématiques s’élevant du désert.',
+  'hero.subheadline.dahab': 'Des eaux turquoise cristallines, les montagnes du Sinaï et une atmosphère paisible inoubliable.',
+  'hero.subheadline.sharm': 'Des plages magnifiques et des eaux cristallines dans l’une des plus belles destinations de la mer Rouge.',
+  'hero.subheadline.hurghada': 'Des mers turquoise et de magnifiques récifs coralliens, parfaits pour les amoureux de la mer.',
+  'hero.subheadline.luxor': 'Un voyage à travers l’histoire parmi de magnifiques temples et trésors pharaoniques.',
+  'hero.subheadline.aswan': 'La beauté du Nil, des paysages paisibles et le charme authentique de la culture nubienne.',
+  'hero.subheadline.siwa': 'Une oasis magique de palmiers, de lacs et de sources naturelles au cœur du désert.',
+  'hero.subheadline.whiteDesert': 'Un monde surréaliste de formations rocheuses blanches dans l’un des déserts les plus spectaculaires d’Égypte.',
   'hero.cta': 'Planifier mon voyage',
   'hero.secondaryCta': 'Explorer les destinations',
   'hero.rating': 'Noté 4,7/5 par les voyageurs',

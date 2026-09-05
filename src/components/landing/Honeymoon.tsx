@@ -96,30 +96,39 @@ export default function Honeymoon() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="w-full relative overflow-hidden rounded-[2rem] aspect-[4/3] md:aspect-[21/9] shadow-2xl ring-1 ring-white/10 bg-navy"
           >
-            <motion.div 
-              className="absolute inset-0 w-full h-[120%]" 
-              style={{ y: imageY, top: "-10%" }}
-            >
-              {honeymoonImages.map((src, idx) => (
-                <div
-                  key={src}
-                  className={`absolute inset-0 w-full h-full transition-opacity duration-[1500ms] ease-in-out ${
-                    idx === currentImg ? "opacity-100 z-10" : "opacity-0 z-0"
-                  }`}
-                >
-                  <Image
-                    src={src}
-                    alt="Romantic honeymoon getaway"
-                    fill
-                    className={`object-cover transition-transform duration-[6000ms] ease-linear ${
-                      idx === currentImg ? "scale-105" : "scale-100"
-                    }`}
-                    sizes="(max-width: 1200px) 100vw, 1200px"
-                    priority={idx === 0}
-                  />
-                </div>
-              ))}
-            </motion.div>
+            <div className="absolute inset-0 w-full h-full">
+              {honeymoonImages.map((src, idx) => {
+                const isActive = idx === currentImg;
+                const isNext = idx === (currentImg + 1) % honeymoonImages.length;
+                const isPrev = idx === (currentImg - 1 + honeymoonImages.length) % honeymoonImages.length;
+
+                if (!isActive && !isNext && !isPrev) {
+                  return null;
+                }
+
+                return (
+                  <motion.div
+                    key={src}
+                    initial={false}
+                    animate={{ opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                    className={`absolute inset-0 w-full h-full ${isActive ? "z-10" : "z-0 pointer-events-none"}`}
+                    style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%' }}
+                  >
+                    <Image
+                      src={src}
+                      alt="Romantic honeymoon getaway"
+                      fill
+                      className="object-cover scale-105 transition-transform duration-[6000ms] ease-linear"
+                      sizes="(max-width: 768px) 100vw, 1200px"
+                      priority={idx === 0}
+                      loading={idx === 0 ? "eager" : "lazy"}
+                      quality={75}
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
 
             {/* Gradient overlay to seamlessly blend with the card below */}
             <div className="absolute inset-0 z-20 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent pointer-events-none" />
@@ -186,7 +195,7 @@ export default function Honeymoon() {
                 className="cta-glow h-14 rounded-full bg-cyan px-10 text-base font-bold text-navy transition-all duration-300 hover:scale-105 hover:bg-cyan-light"
                 asChild
               >
-                <a href="#contact" className="flex items-center gap-2">
+                <a href="/#contact" className="flex items-center gap-2">
                   {t("honeymoon.cta")}
                   <ArrowRight className="size-5" />
                 </a>

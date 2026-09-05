@@ -24,7 +24,7 @@ export default function Testimonials() {
   const { t } = useI18n();
 
   return (
-    <section id="testimonials" className="relative w-full overflow-hidden py-[var(--section-spacing)]">
+    <section id="testimonials" className="relative w-full overflow-hidden py-16 md:py-24">
       {/* Subtle background */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
