@@ -1,6 +1,8 @@
 import { Suspense } from 'react';
 import OffersClient from './_client';
 
+export const dynamicParams = true;
+
 export function generateStaticParams() {
   const categories = [
     'all',

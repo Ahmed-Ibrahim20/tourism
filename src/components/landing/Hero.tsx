@@ -11,12 +11,6 @@ import { useI18n } from "@/lib/i18n";
 
 const slides = [
   {
-    image: "/images/hero/pyramids.jpeg",
-    alt: "Pyramids",
-    headlineKey: "hero.headline.giza",
-    subtitleKey: "hero.subheadline.giza",
-  },
-  {
     image: "/images/hero/dahab.jpeg",
     alt: "Dahab",
     headlineKey: "hero.headline.dahab",
@@ -33,6 +27,12 @@ const slides = [
     alt: "Hurghada",
     headlineKey: "hero.headline.hurghada",
     subtitleKey: "hero.subheadline.hurghada",
+  },
+  {
+    image: "/images/hero/pyramids.jpeg",
+    alt: "Pyramids",
+    headlineKey: "hero.headline.giza",
+    subtitleKey: "hero.subheadline.giza",
   },
   {
     image: "/images/hero/luxor.jpeg",
