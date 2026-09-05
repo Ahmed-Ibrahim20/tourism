@@ -2,12 +2,14 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import ar from './locales/ar';
 import en from './locales/en';
+import es from './locales/es';
+import it from './locales/it';
 import de from './locales/de';
 import fr from './locales/fr';
 
-const translations = { ar, en, de, fr };
+const translations = { ar, en, es, it, de, fr };
 
-export type Lang = 'en' | 'de' | 'fr' | 'ar';
+export type Lang = 'en' | 'ar' | 'es' | 'it' | 'de' | 'fr';
 
 interface I18nState {
   lang: Lang;
@@ -89,20 +91,30 @@ export const useI18n = create<I18nState>()(
     }),
     {
       name: 'dahab-dream-tour-v5',
-      onRehydrateStorage: () => (state) => {
-        if (state && typeof document !== 'undefined') {
-          const dir = state.lang === 'ar' ? 'rtl' : 'ltr';
-          document.documentElement.dir = dir;
-          document.documentElement.lang = state.lang || 'ar';
-        }
-      },
+      skipHydration: true,
     }
   )
 );
 
+if (typeof window !== 'undefined') {
+  // Rehydrate after initial client hydration pass to prevent SSR mismatch
+  setTimeout(() => {
+    useI18n.persist.rehydrate();
+    const state = useI18n.getState();
+    if (state && state.lang) {
+      const dir = state.lang === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.dir = dir;
+      document.documentElement.lang = state.lang;
+    }
+  }, 0);
+}
+
 export const LANGUAGES = [
   { code: 'ar', label: 'العربية', flag: '🇪🇬' },
   { code: 'en', label: 'English', flag: '🇺🇸' },
+  { code: 'es', label: 'Español', flag: '🇪🇸' },
+  { code: 'it', label: 'Italiano', flag: '🇮🇹' },
   { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
   { code: 'fr', label: 'Français', flag: '🇫🇷' },
 ] as const;
+

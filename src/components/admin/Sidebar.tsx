@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { 
   LayoutDashboard, 
   CalendarDays, 
@@ -13,7 +12,10 @@ import {
   Settings,
   LogOut,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Compass,
+  MessageSquareQuote,
+  Layers
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 
@@ -31,7 +33,10 @@ export default function Sidebar({ isCollapsed, toggleCollapse, onLogoutClick }: 
     { name: t('admin.dashboard'), href: '/admin', icon: LayoutDashboard },
     { name: t('admin.bookings'), href: '/admin/bookings', icon: CalendarDays },
     { name: t('admin.destinations'), href: '/admin/destinations', icon: Map },
+    { name: 'Categories', href: '/admin/categories', icon: Layers },
+    { name: 'Services Management (سيرفس ماندج منت)', href: '/admin/services', icon: Compass },
     { name: t('admin.packages'), href: '/admin/packages', icon: Package },
+    { name: 'Quote Requests', href: '/admin/quotes', icon: MessageSquareQuote },
     { name: t('admin.users'), href: '/admin/users', icon: Users },
     { name: t('admin.settings'), href: '/admin/settings', icon: Settings },
   ];

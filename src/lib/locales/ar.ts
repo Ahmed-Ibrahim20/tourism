@@ -16,35 +16,78 @@ const ar = {
   'brand.name': 'دهب دريم تور',
   'search.popular': 'أكثر عمليات البحث شيوعاً',
 
+  // ── Search Page ────────────────────────────────────────────────────
+  'search.title': 'وجهات مختارة بعناية',
+  'search.subtitle': 'اعثر على مغامرتك القادمة من بين مجموعتنا المختارة من الرحلات والفنادق وباقات شهر العسل.',
+  'search.filter': 'تصفية النتائج',
+  'search.noResults': 'لا توجد نتائج مطابقة',
+  'search.placeholder': 'ابحث عن وجهة أو رحلة...',
+  'search.reset': 'إعادة تعيين',
+  'search.sort.featured': 'الأكثر تميزاً',
+  'search.sort.priceLow': 'السعر: الأقل أولاً',
+  'search.sort.priceHigh': 'السعر: الأعلى أولاً',
+  'search.sort.rating': 'الأعلى تقييماً',
+  'search.category.all': 'جميع الباقات',
+  'search.category.honeymoon': 'شهر العسل',
+  'search.category.hotels': 'الفنادق',
+  'search.category.experiences': 'التجارب',
+  'search.category.trips': 'الرحلات',
+  'search.loading': 'جاري استكشاف العروض...',
+
+  // ── Filter Sidebar ────────────────────────────────────────────
+  'filter.reset': 'إعادة تعيين',
+  'search.categories': 'التصنيفات',
+  'search.priceRange': 'نطاق السعر',
+  'search.starRating': 'التقييم بالنجوم',
+  'category.all': 'جميع الباقات',
+  'category.honeymoon': 'شهر العسل',
+  'category.hotels': 'الفنادق',
+  'category.experiences': 'التجارب',
+  'category.trips': 'الرحلات',
+  'category.tours': 'الجولات',
+  'category.diving-marine': 'غطس بحري',
+
+  // ── Offers Page ───────────────────────────────────────────────────
+  'offers.filter': 'تصفية نتائج البحث',
+  'offers.filterTitle': 'تصفية نتائج البحث',
+  'offers.activeFilters': 'الفلاتر النشطة:',
+  'offers.resetAll': 'إعادة ضبط كل الفلاتر',
+  'offers.noResults': 'لم نجد عروض تطابق نتائج البحث',
+  'offers.noResultsDesc': 'جرب التغيير في معايير البحث أو تصفية الفلاتر لعرض نتائج أكثر.',
+  'offers.showAll': 'إعادة عرض كل العروض',
+  'offers.prev': 'السابق',
+  'offers.next': 'التالي',
+  'offers.showing': 'عرض',
+  'offers.of': 'من أصل',
+  'offers.results': 'عرض',
+  'offers.sort.featured': 'الأكثر تميزاً',
+  'offers.sort.priceLow': 'السعر: الأقل أولاً',
+  'offers.sort.priceHigh': 'السعر: الأعلى أولاً',
+  'offers.sort.rating': 'الأعلى تقييماً',
+  'offers.loading': 'جاري تحميل العروض...',
+  'offers.home': 'الرئيسية',
+
   // ── Hero ───────────────────────────────────────────────────────────
   'hero.tagline': 'تجارب سفر فاخرة في قلب مصر',
   'hero.headline': 'اكتشف مصر كما لم تعرفها من قبل',
-  'hero.headline.giza': 'عظمة الأهرامات الخالدة',
-  'hero.headline.dahab': 'سحر دهب الذهبي',
-  'hero.headline.hurghada': 'جنة البحر الأحمر',
-  'hero.headline.sharm': 'لؤلؤة سيناء الخلابة',
-  'hero.headline.luxor': 'مدينة الفراعنة العريقة',
-  'hero.headline.alexandria': 'جوهرة المتوسط الساحرة',
-  'hero.headline.nile': 'نيل مصر الخالد',
-  'hero.headline.sinai': 'قمم سيناء المقدسة',
+  'hero.headline.giza': 'الأهرامات',
+  'hero.headline.dahab': 'دهب',
+  'hero.headline.sharm': 'شرم الشيخ',
+  'hero.headline.hurghada': 'الغردقة',
+  'hero.headline.luxor': 'الأقصر',
+  'hero.headline.aswan': 'أسوان',
+  'hero.headline.siwa': 'سيوة',
+  'hero.headline.whiteDesert': 'الصحراء البيضاء',
   'hero.subheadline':
     'من الشواطئ الذهبية في دهب إلى الشعاب المرجانية الزاهية في البحر الأحمر — رحلات فاخرة مُصمَّمة خصيصاً لتحقيق أحلامك.',
-  'hero.subheadline.giza':
-    'قف أمام أعظم عجائب الدنيا — الأهرامات الخالدة التي شيّدها الفراعنة منذ أكثر من 4500 عام في انتظارك.',
-  'hero.subheadline.dahab':
-    'اغطس في مياه الثقب الأزرق الكريستالية الشفافة، حيث تلتقي الجبال الصحراوية بأكثر الشعاب المرجانية حيوية وجمالاً في العالم.',
-  'hero.subheadline.hurghada':
-    'عش جنة البحر الأحمر الحقيقية — منتجعات فاخرة، شواطئ بكر، وغوص احترافي لا مثيل له.',
-  'hero.subheadline.sharm':
-    'اكتشف شرم الشيخ، حيث تلتقي جبال سيناء بالمياه الفيروزية — وجهة الغوص والرفاهية الأولى في العالم.',
-  'hero.subheadline.luxor':
-    'تجوّل في وادي الملوك ومعابد الأقصر العريقة — حيث يعيش مجد الفراعنة حياةً جديدة بين أروقة التاريخ.',
-  'hero.subheadline.alexandria':
-    'استكشف جوهرة البحر المتوسط — الإسكندرية، حيث يتقاطع التاريخ العريق مع الأناقة المعاصرة على شط البحر.',
-  'hero.subheadline.nile':
-    'أبحر في قلب الحضارة على متن رحلة نيلية ساحرة عند الغروب — رحلة عبر الزمن لن تُنسى أبداً.',
-  'hero.subheadline.sinai':
-    'اصعد إلى قمم سيناء المقدسة — حيث يستقبلك شروق شمس يغير الحياة وسكينة روحية لا توصف.',
+  'hero.subheadline.giza': 'عظمة مصر القديمة في مشهد أيقوني يجمع الأهرامات والصحراء.',
+  'hero.subheadline.dahab': 'مياه تركوازية صافية وجبال سيناء وأجواء هادئة لا تُنسى.',
+  'hero.subheadline.sharm': 'شواطئ ساحرة ومياه زرقاء صافية في واحدة من أجمل وجهات البحر الأحمر.',
+  'hero.subheadline.hurghada': 'بحر فيروزي وشعاب مرجانية خلابة لعشاق البحر والمغامرة.',
+  'hero.subheadline.luxor': 'رحلة عبر التاريخ بين المعابد والآثار الفرعونية العظيمة.',
+  'hero.subheadline.aswan': 'جمال النيل والطبيعة الهادئة وسحر الثقافة النوبية الأصيلة.',
+  'hero.subheadline.siwa': 'واحة ساحرة تجمع بين النخيل والبحيرات والينابيع وسط الصحراء.',
+  'hero.subheadline.whiteDesert': 'عالم من الصخور البيضاء الغريبة وسط واحدة من أروع صحارى مصر.',
   'hero.cta': 'خطّط رحلتي الآن',
   'hero.secondaryCta': 'استكشف الوجهات',
   'hero.rating': 'تقييم 4.9/5 من المسافرين',
@@ -119,6 +162,7 @@ const ar = {
   // ── Map ────────────────────────────────────────────────────────────
   'map.title': 'اعثر على جنتك',
   'map.subtitle': 'خريطة تفاعلية لاستكشاف وجهاتنا الحصرية',
+  'map.description': 'استكشف وجهاتنا السياحية الحصرية. اضغط على أي نقطة لفتح خيارات الحجز والخدمات مباشرة.',
   'map.dahabInfo':
     'بلدة ساحلية هادئة تشتهر بالغوص الاحترافي وأجمل الشعاب المرجانية في العالم، مع أجواء بوهيمية لا تُقاوم.',
   'map.hurghadaInfo':
@@ -149,11 +193,13 @@ const ar = {
   'tripBuilder.totalPrice': 'إجمالي السعر التقديري',
   'tripBuilder.inquire': 'استفسر الآن',
 
-  // ── Experiences ────────────────────────────────────────────────────
-  'experiences.title': 'تجارب لا تُنسى أبداً',
-  'experiences.subtitle':
-    'أنشطة مُختارة بدقة لكل نوع من المسافرين',
-  'experiences.learnMore': 'اعرف المزيد',
+  // ── Experiences & Articles ──────────────────────────────────────────
+  'experiences.title': 'مقالات وتجارب السفر',
+  'experiences.subtitle': 'اقرأ أحدث المقالات والنصائح واستكشف حكايات وتجارب المسافرين في أجمل الوجهات',
+  'experience.title': 'مقالات وتجارب السفر',
+  'experience.subtitle': 'اقرأ أحدث المقالات والنصائح واستكشف حكايات وتجارب المسافرين في أجمل الوجهات',
+  'experience.readArticle': 'اقرأ المقال',
+  'experiences.learnMore': 'اقرأ المزيد',
   'experience.scubaDiving': 'الغوص بالأكسجين',
   'experience.desertSafari': 'سفاري الصحراء',
   'experience.yachtCruise': 'رحلة يخت فاخرة',
@@ -217,8 +263,20 @@ const ar = {
     'أرسل لنا تفاصيلك وسيتواصل معك خبراؤنا لتصميم برنامجك المثالي',
   'contact.name': 'اسمك الكريم',
   'contact.email': 'البريد الإلكتروني',
-  'contact.message': 'رسالتك',
-  'contact.submit': 'أرسل الرسالة',
+  'contact.phone': 'رقم الهاتف / واتساب',
+  'contact.adults': 'عدد البالغين (18+)',
+  'contact.children': 'عدد الأطفال (0-17)',
+  'contact.nights': 'عدد الليالي',
+  'contact.startDate': 'تاريخ بداية الرحلة / الدخول',
+  'contact.endDate': 'تاريخ نهاية الرحلة / الخروج',
+  'contact.durationMode': 'طريقة إدخال مدة الإقامة',
+  'contact.modeDates': 'تحديد تاريخ الدخول والخروج (حساب تلقائي)',
+  'contact.modeNights': 'تحديد عدد الليالي وتاريخ البداية مباشرة',
+  'contact.message': 'رسالتك وتفاصيل رحلتك',
+  'contact.submit': 'أرسل الطلب الآن',
+  'filter.from': 'تاريخ الدخول',
+  'filter.to': 'تاريخ الخروج',
+  'product.phone': 'رقم الهاتف / واتساب',
 
   // ── Footer ─────────────────────────────────────────────────────────
   'footer.description':
@@ -238,21 +296,9 @@ const ar = {
 
   // ── Search & Filter ────────────────────────────────────────────────
   'in': 'في',
-  'search.title': 'تجارب مختارة',
-  'search.subtitle': 'اعثر على مغامرتك القادمة من خلال مجموعتنا المختارة من الرحلات والفنادق وباقات شهر العسل.',
-  'search.filter': 'تصفية النتائج',
-  'search.priceRange': 'نطاق السعر',
-  'search.starRating': 'تصنيف النجوم',
-  'search.categories': 'الفئات',
   'search.resultsFound': 'تم العثور على {count} تجربة',
   'search.sortBy': 'ترتيب حسب',
-  'search.noResults': 'لا توجد تجارب تطابق معاييرك.',
-  'category.all': 'كل الباقات',
-  'category.hotels': 'فنادق فاخرة',
-  'category.honeymoon': 'شهر العسل',
-  'category.tours': 'رحلات خاصة',
   'filter.apply': 'تطبيق الفلتر',
-  'filter.reset': 'إعادة تعيين',
 
   // ── Product Detail Page ────────────────────────────────────────────
   'product.duration': 'المدة',

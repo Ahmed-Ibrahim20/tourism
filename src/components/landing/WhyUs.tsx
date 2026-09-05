@@ -171,7 +171,7 @@ export default function WhyUs() {
   const statsInView = useInView(statsRef, { once: true, amount: 0.3 });
 
   return (
-    <section id="why-us" className="relative w-full overflow-hidden py-[var(--section-spacing)]">
+    <section id="why-us" className="relative w-full overflow-hidden py-16 md:py-24">
       {/* Subtle background pattern */}
       <div className="noise-overlay pointer-events-none absolute inset-0" />
       <div

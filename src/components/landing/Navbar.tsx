@@ -149,7 +149,7 @@ function NavLink({
         : 'text-foreground/80 hover:text-cyan'
         }`}
     >
-      {t(item.labelKey)}
+      <span suppressHydrationWarning>{t(item.labelKey)}</span>
 
       {/* Underline animation */}
       <span
@@ -171,7 +171,8 @@ function MobileMenuContent({
   activeSection: string
   onNavClick: () => void
 }) {
-  const { t, lang, setLang } = useI18n()
+  const { t, lang, setLang, dir } = useI18n()
+  const isRTL = dir === 'rtl'
   const { isAuthenticated, user, logout } = useAuth()
 
   return (
@@ -417,14 +418,18 @@ export default function Navbar() {
       threshold: [0, 0.25, 0.5, 0.75, 1],
     })
 
-    // Observe sections after a short delay to ensure DOM is ready
     const timer = setTimeout(() => {
       NAV_ITEMS.forEach((item) => {
-        // Strip leading slash if present to make it a valid selector for querySelector
-        const selector = item.href.startsWith('/') ? item.href.slice(1) : item.href
-        const el = document.querySelector(selector)
-        if (el) {
-          observerRef.current?.observe(el)
+        try {
+          const selector = item.href.startsWith('/') ? item.href.slice(1) : item.href
+          if (selector && selector.startsWith('#')) {
+            const el = document.querySelector(selector)
+            if (el) {
+              observerRef.current?.observe(el)
+            }
+          }
+        } catch {
+          // Ignore invalid selector errors
         }
       })
     }, 100)
@@ -442,11 +447,8 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 keep-dark"
+      <header
+        className="fixed top-0 left-0 right-0 z-50 keep-dark transition-all duration-300"
       >
         {/* Subtle gradient line at bottom of navbar */}
         <div className="absolute bottom-0 left-0 right-0 h-px opacity-100">
@@ -461,7 +463,7 @@ export default function Navbar() {
                 <Image src="/images/image.png" alt="Dahab Dream Tour" fill className="object-cover" priority />
               </div>
               <span className="inline-flex items-center justify-center rounded-full bg-white/10 px-2.5 py-0.5 md:px-3 md:py-1 backdrop-blur-md border border-white/20 shadow-sm transition-all duration-300 group-hover:bg-white/15">
-                <span className="bg-gradient-to-r from-white via-[#00D4FF] to-white bg-clip-text text-[9px] md:text-[10px] font-bold uppercase tracking-[0.05em] md:tracking-[0.15em] text-transparent drop-shadow-sm max-w-[100px] sm:max-w-none line-clamp-1 sm:line-clamp-none">
+                <span className="bg-gradient-to-r from-white via-[#00D4FF] to-white bg-clip-text text-[9px] md:text-[10px] font-bold uppercase tracking-[0.05em] md:tracking-[0.15em] text-transparent drop-shadow-sm max-w-[100px] sm:max-w-none line-clamp-1 sm:line-clamp-none" suppressHydrationWarning>
                   {t('brand.name')}
                 </span>
               </span>
@@ -590,7 +592,7 @@ export default function Navbar() {
             </div>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
       {/* Spacer to prevent content from going under the fixed navbar */}
       <div className="h-14 lg:h-16" />

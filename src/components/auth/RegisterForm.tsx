@@ -9,8 +9,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/lib/auth'
+import { apiService } from '@/services/api'
 import { toast } from 'sonner'
-import { Loader2, Mail, Lock, User } from 'lucide-react'
+import { Loader2, Mail, Lock, User as UserIcon } from 'lucide-react'
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -42,19 +43,21 @@ export default function RegisterForm() {
   async function onSubmit(data: RegisterFormValues) {
     setIsLoading(true)
     try {
-      // Mock registration delay
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      
-      login({
-        id: '1',
+      const response = await apiService.auth.register({
         name: data.name,
         email: data.email,
+        password: data.password,
+        password_confirmation: data.confirmPassword,
       })
       
-      toast.success('Account created successfully!')
-      router.push('/')
-    } catch (error) {
-      toast.error('Registration failed. Please try again.')
+      if (response.success && response.data) {
+        const { user, token } = response.data
+        login(user, token)
+        toast.success(response.message || 'Account created successfully!')
+        router.push('/')
+      }
+    } catch (error: any) {
+      // Error is handled by httpClient interceptor
     } finally {
       setIsLoading(false)
     }
@@ -65,7 +68,7 @@ export default function RegisterForm() {
       <div className="space-y-2">
         <Label htmlFor="name">Full Name</Label>
         <div className="relative">
-          <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-foreground/40" />
+          <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-foreground/40" />
           <Input
             id="name"
             placeholder="John Doe"
@@ -131,7 +134,7 @@ export default function RegisterForm() {
 
       <Button
         type="submit"
-        className="w-full bg-cyan text-navy font-bold h-11 hover:bg-cyan/90 transition-all mt-2"
+        className="w-full bg-cyan text-navy font-bold h-11 hover:bg-cyan/90 transition-all mt-2 cursor-pointer"
         disabled={isLoading}
       >
         {isLoading ? (

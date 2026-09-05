@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/lib/auth'
+import { apiService } from '@/services/api'
 import { toast } from 'sonner'
 import { Loader2, Mail, Lock } from 'lucide-react'
 
@@ -35,19 +36,25 @@ export default function LoginForm() {
   async function onSubmit(data: LoginFormValues) {
     setIsLoading(true)
     try {
-      // Mock login delay
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      
-      login({
-        id: '1',
-        name: data.email.split('@')[0],
+      const response = await apiService.auth.login({
         email: data.email,
+        password: data.password,
       })
-      
-      toast.success('Login successful!')
-      router.push('/')
-    } catch (error) {
-      toast.error('Invalid credentials')
+
+      if (response.success && response.data) {
+        const { user, token } = response.data
+        login(user, token)
+        toast.success(response.message || 'Logged in successfully!')
+
+        // Redirect based on role
+        if (user.role === 'op_tier1' || user.role === 'op_tier2' || user.is_admin) {
+          router.push('/admin')
+        } else {
+          router.push('/')
+        }
+      }
+    } catch (error: any) {
+      // Error handling is managed by httpClient interceptor
     } finally {
       setIsLoading(false)
     }
@@ -73,9 +80,8 @@ export default function LoginForm() {
       </div>
 
       <div className="space-y-2">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center">
           <Label htmlFor="password">Password</Label>
-          <a href="#" className="text-xs text-cyan hover:underline">Forgot password?</a>
         </div>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-foreground/40" />
@@ -94,7 +100,7 @@ export default function LoginForm() {
 
       <Button
         type="submit"
-        className="w-full bg-cyan text-navy font-bold h-11 hover:bg-cyan/90 transition-all"
+        className="w-full bg-cyan text-navy font-bold h-11 hover:bg-cyan/90 transition-all cursor-pointer"
         disabled={isLoading}
       >
         {isLoading ? (

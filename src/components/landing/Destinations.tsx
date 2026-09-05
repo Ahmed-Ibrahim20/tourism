@@ -1,41 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import dynamic from "next/dynamic";
+import { apiService, Destination } from "@/services/api";
 
 const DestinationModal = dynamic(() => import("./DestinationModal"), {
   ssr: false,
 });
 
-/* ── Data ──────────────────────────────────────────────────────────────────── */
-
-const destinations = [
-  { id: "aswan", name: "aswan.name", tagline: "aswan.tagline", image: "/images/hero/01-giza.jpg" },
-  { id: "dahab", name: "dahab.name", tagline: "dahab.tagline", image: "/images/hero/02-dahab.jpg" },
-  { id: "hurghada", name: "hurghada.name", tagline: "hurghada.tagline", image: "/images/hero/03-hurghada.jpg" },
-  { id: "sharm", name: "sharm.name", tagline: "sharm.tagline", image: "/images/hero/04-sharm.jpg" },
-  { id: "luxor", name: "luxor.name", tagline: "luxor.tagline", image: "/images/hero/05-luxor.jpg" },
-  { id: "alexandria", name: "alexandria.name", tagline: "alexandria.tagline", image: "/images/hero/06-alexandria.jpg" },
-  { id: "nile", name: "nile.name", tagline: "nile.tagline", image: "/images/hero/07-nile.jpg" },
-  { id: "sinai", name: "sinai.name", tagline: "sinai.tagline", image: "/images/hero/08-sinai.jpg" },
-] as const;
-
+/* Default fallback images by destination slug */
+const fallbackImages: Record<string, string> = {
+  aswan: "/images/hero/01-giza.jpg",
+  dahab: "/images/hero/02-dahab.jpg",
+  hurghada: "/images/hero/03-hurghada.jpg",
+  "sharm-el-sheikh": "/images/hero/04-sharm.jpg",
+  sharm: "/images/hero/04-sharm.jpg",
+  luxor: "/images/hero/05-luxor.jpg",
+  alexandria: "/images/hero/06-alexandria.jpg",
+  nile: "/images/hero/07-nile.jpg",
+  sinai: "/images/hero/08-sinai.jpg",
+};
 
 export default function Destinations() {
-  const { t } = useI18n();
-  const [selectedDestination, setSelectedDestination] = useState<string | null>(null);
+  const { t, lang } = useI18n();
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
 
-  const selected = destinations.find((d) => d.id === selectedDestination) ?? null;
+  useEffect(() => {
+    async function fetchPublicDestinations() {
+      setLoading(true);
+      try {
+        const res = await apiService.public.destinations.index();
+        if (res?.data && res.data.length > 0) {
+          setDestinations(res.data);
+        }
+      } catch (err) {
+        console.warn("Failed to fetch public destinations from API");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPublicDestinations();
+  }, [lang]);
 
   return (
     <section
       id="destinations"
-      className="relative overflow-hidden py-[var(--section-spacing)] px-[var(--container-padding)]"
+      className="relative overflow-hidden py-16 md:py-24 px-4 sm:px-6 lg:px-12"
     >
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section header */}
@@ -54,27 +71,35 @@ export default function Destinations() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {destinations.map((dest, i) => (
-            <DestinationCard
-              key={dest.id}
-              destination={dest}
-              index={i}
-              onSelect={setSelectedDestination}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-96 rounded-3xl bg-navy-light/40 border border-white/5 animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {destinations.map((dest, i) => (
+              <DestinationCard
+                key={dest.id}
+                destination={dest}
+                index={i}
+                onSelect={(d) => setSelectedDestination(d)}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <DestinationModal
-        key={selected?.id ?? 'closed'}
+        key={selectedDestination?.id ?? "closed"}
         destination={
-          selected
+          selectedDestination
             ? {
-                id: selected.id,
-                name: t(selected.name),
-                tagline: t(selected.tagline),
-                image: selected.image,
+                id: selectedDestination.id,
+                name: selectedDestination.name_translations?.[lang] || selectedDestination.name,
+                tagline: selectedDestination.short_description_translations?.[lang] || selectedDestination.short_description || selectedDestination.name,
+                image: selectedDestination.cover_url || fallbackImages[selectedDestination.slug] || "/images/hero/04-sharm.jpg",
               }
             : null
         }
@@ -89,44 +114,66 @@ function DestinationCard({
   index,
   onSelect,
 }: {
-  destination: (typeof destinations)[number];
+  destination: Destination;
   index: number;
-  onSelect: (id: string) => void;
+  onSelect: (dest: Destination) => void;
 }) {
-  const { t } = useI18n();
+  const { t, lang, dir } = useI18n();
+  const [imgSrc, setImgSrc] = useState(
+    destination.cover_url || fallbackImages[destination.slug] || "/images/hero/04-sharm.jpg"
+  );
+
+  const destName = destination.name_translations?.[lang] || destination.name;
+  const destTagline = destination.short_description_translations?.[lang] || destination.short_description || destName;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="group cursor-pointer"
-      onClick={() => onSelect(destination.id)}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      onClick={() => onSelect(destination)}
+      className="group relative h-96 overflow-hidden rounded-3xl border border-white/10 bg-navy cursor-pointer shadow-xl transition-all duration-500 hover:border-cyan/40 hover:-translate-y-1.5"
     >
-      <div className="glass-card relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 group-hover:border-cyan/30 transition-all duration-300">
-        <Image
-          src={destination.image}
-          alt={t(destination.name)}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-        />
-        
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+      {/* Background Image */}
+      <Image
+        src={imgSrc}
+        alt={destName}
+        fill
+        unoptimized
+        className="object-cover transition-transform duration-700 group-hover:scale-110"
+        onError={() => {
+          const fallback = fallbackImages[destination.slug] || "/images/hero/04-sharm.jpg";
+          if (imgSrc !== fallback) {
+            setImgSrc(fallback);
+          }
+        }}
+      />
 
-        <div className="absolute inset-0 p-6 flex flex-col justify-end">
-          <h3 className="text-xl font-bold text-white mb-1 group-hover:text-cyan transition-colors">
-            {t(destination.name)}
-          </h3>
-          <p className="text-xs text-white/60 line-clamp-2 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-            {t(destination.tagline)}
-          </p>
-          
-          <div className="mt-4 flex items-center text-cyan text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
-            {t("destinations.cta")}
-            <ArrowRight className="ml-2 size-3 transition-transform group-hover:translate-x-1" />
-          </div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent transition-opacity duration-300 group-hover:via-navy/30" />
+
+      {/* Badge */}
+      <div className="absolute top-4 left-4 z-10">
+        <span className="flex items-center gap-1 px-3 py-1 rounded-full bg-navy/80 border border-cyan/30 text-cyan text-xs font-bold backdrop-blur-md">
+          <MapPin className="size-3" /> {destName}
+        </span>
+      </div>
+
+      {/* Content Bottom */}
+      <div className="absolute bottom-0 inset-x-0 p-6 z-10 space-y-2">
+        <h3 className="text-2xl font-black text-white group-hover:text-cyan transition-colors">
+          {destName}
+        </h3>
+        <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+          {destTagline}
+        </p>
+
+        <div className="pt-2 flex items-center justify-between">
+          <span className="text-xs font-bold text-cyan flex items-center gap-1">
+            {t("destinations.exploreOptions")}
+            <ArrowRight className={`size-3.5 transition-transform ${dir === 'rtl' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+          </span>
         </div>
       </div>
     </motion.div>

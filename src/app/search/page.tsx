@@ -158,7 +158,7 @@ function SearchContent() {
     const targetCategories = selectedCategories.length > 0 ? selectedCategories : ['hotels', 'honeymoon', 'tours'];
     
     // Find what categories are already present in filteredProducts
-    const presentCategories = new Set(filteredProducts.map(p => p.category));
+    const presentCategories = new Set<string>(filteredProducts.map(p => p.category));
     
     // Find missing categories
     const missingCategories = targetCategories.filter(cat => !presentCategories.has(cat));
@@ -173,7 +173,7 @@ function SearchContent() {
         tours: 150
       };
       
-      let finalPrice = basePrices[cat] || 500;
+      let finalPrice = basePrices[cat] ?? 150;
       if (priceRange[0] > finalPrice) finalPrice = priceRange[0] + 50;
       if (priceRange[1] < finalPrice) finalPrice = priceRange[1] - 50;
 

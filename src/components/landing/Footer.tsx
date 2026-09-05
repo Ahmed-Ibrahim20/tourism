@@ -49,7 +49,7 @@ function WaveIcon({ className }: { className?: string }) {
 
 function TikTokIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.01.15 1.56.76 3.01 1.76 4.14 1.14 1.25 2.64 1.94 4.3 2.15v4.06c-1.52-.08-2.99-.48-4.32-1.16-.62-.31-1.19-.7-1.69-1.15v7.41c-.04 2.1-.81 4.1-2.18 5.64-1.4 1.58-3.32 2.52-5.41 2.66-2.11.14-4.2-.47-5.83-1.7-1.61-1.22-2.61-3.03-2.8-5.08-.18-2.03.47-4.06 1.83-5.55 1.34-1.48 3.23-2.4 5.3-2.58v4.18c-1.07.12-2.08.6-2.82 1.35-.74.75-1.18 1.74-1.22 2.81-.04 1.05.34 2.06 1.05 2.83.71.77 1.68 1.25 2.72 1.35 1.06.1 2.12-.22 2.94-.88.8-.64 1.3-1.56 1.38-2.58h-.02v-17z"/>
     </svg>
   )
@@ -195,7 +195,7 @@ export default function Footer() {
           {/* Column 1: Brand */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
             {/* Logo */}
-            <a href="#home" className="mb-4 inline-flex items-center justify-center no-underline">
+            <a href="/#home" className="mb-4 inline-flex items-center justify-center no-underline">
               <div className="relative flex h-16 w-16 md:h-20 md:w-20 rounded-md overflow-hidden shadow-lg border border-cyan/20">
                 <Image src="/images/image.png" alt="Dahab Dream Tour" fill className="object-cover" />
               </div>
@@ -220,10 +220,10 @@ export default function Footer() {
               {t('footer.quickLinks')}
             </h4>
             <ul className="flex flex-col gap-2.5">
-              <FooterLink href="#home">{t('nav.home')}</FooterLink>
-              <FooterLink href="#about">{t('nav.about')}</FooterLink>
-              <FooterLink href="#contact">{t('nav.contact')}</FooterLink>
-              <FooterLink href="#">Blog</FooterLink>
+              <FooterLink href="/#home">{t('nav.home')}</FooterLink>
+              <FooterLink href="/#about">{t('nav.about')}</FooterLink>
+              <FooterLink href="/#contact">{t('nav.contact')}</FooterLink>
+              <FooterLink href="/experiences">{t('nav.experiences')}</FooterLink>
             </ul>
           </motion.div>
 
@@ -233,9 +233,9 @@ export default function Footer() {
               {t('footer.destinations')}
             </h4>
             <ul className="flex flex-col gap-2.5">
-              <FooterLink href="#destinations">{t('dahab.name')}</FooterLink>
-              <FooterLink href="#destinations">{t('hurghada.name')}</FooterLink>
-              <FooterLink href="#destinations">{t('sharm.name')}</FooterLink>
+              <FooterLink href="/search?location=Dahab">{t('dahab.name')}</FooterLink>
+              <FooterLink href="/search?location=Hurghada">{t('hurghada.name')}</FooterLink>
+              <FooterLink href="/search?location=Sharm">{t('sharm.name')}</FooterLink>
             </ul>
           </motion.div>
 
@@ -245,10 +245,10 @@ export default function Footer() {
               {t('footer.support')}
             </h4>
             <ul className="flex flex-col gap-2.5">
-              <FooterLink href="#">FAQ</FooterLink>
-              <FooterLink href="#">{t('footer.privacy')}</FooterLink>
-              <FooterLink href="#">{t('footer.terms')}</FooterLink>
-              <FooterLink href="#">{t('footer.cookies')}</FooterLink>
+              <FooterLink href="/#contact">FAQ</FooterLink>
+              <FooterLink href="/#contact">{t('footer.privacy')}</FooterLink>
+              <FooterLink href="/#contact">{t('footer.terms')}</FooterLink>
+              <FooterLink href="/#contact">{t('footer.cookies')}</FooterLink>
             </ul>
           </motion.div>
         </div>

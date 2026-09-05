@@ -15,24 +15,24 @@ const de = {
   // ── Hero ───────────────────────────────────────────────────────────
   'hero.tagline': 'Luxus-Reiseerlebnisse in Ägypten',
   'hero.headline': 'Entdecken Sie Ägypten wie nie zuvor',
+  'hero.headline.giza': 'Pyramiden',
+  'hero.headline.dahab': 'Dahab',
+  'hero.headline.sharm': 'Scharm El-Scheich',
+  'hero.headline.hurghada': 'Hurghada',
+  'hero.headline.luxor': 'Luxor',
+  'hero.headline.aswan': 'Assuan',
+  'hero.headline.siwa': 'Oase Siwa',
+  'hero.headline.whiteDesert': 'Weiße Wüste',
   'hero.subheadline':
     'Von den goldenen Küsten Dahabs bis zu den lebendigen Riffen des Roten Meeres — kuratierte Luxusreisen, die auf Ihre Träume zugeschnitten sind.',
-  'hero.subheadline.giza':
-    'Treten Sie vor die zeitlosen großen Pyramiden von Gizeh — wo alte Pharaonen Monumente errichteten, die über 4.500 Jahre bestehen.',
-  'hero.subheadline.dahab':
-    'Tauchen Sie in die kristallklaren Gewässer des Blue Hole, wo Wüstenberge auf die lebendigsten Korallenriffe der Welt treffen.',
-  'hero.subheadline.hurghada':
-    'Erleben Sie das ultimative Paradies am Roten Meer — Luxusresorts, makellose Strände und erstklassiges Tauchen erwarten Sie.',
-  'hero.subheadline.sharm':
-    'Entdecken Sie Sharm El Sheikh, wo Sinai-Berge auf türkisfarbene Wasser treffen — ein Spielfeld für Taucher und Luxusreisende.',
-  'hero.subheadline.luxor':
-    'Spazieren Sie durch das Tal der Könige und die antiken Tempel von Luxor — wo der Glanz der Pharaonen lebendig wird.',
-  'hero.subheadline.alexandria':
-    'Erkunden Sie das Mittelmeer-Juwel Alexandrias — wo alte Geschichte und moderne Eleganz am Meer aufeinandertreffen.',
-  'hero.subheadline.nile':
-    'Segeln Sie den legendären Nil bei Sonnenuntergang — eine zeitlose Reise durch das Herz der alten ägyptischen Zivilisation.',
-  'hero.subheadline.sinai':
-    'Besteigen Sie die heiligen Gipfel des Berges Sinai — wo atemberaubende Sonnenaufgänge und spirituelle Ruhe warten.',
+  'hero.subheadline.giza': 'Die zeitlose Erhabenheit des alten Ägyptens mit den ikonischen Pyramiden aus der Wüste.',
+  'hero.subheadline.dahab': 'Kristallklares türkisblaues Wasser, die Berge des Sinai und eine unvergessliche friedliche Atmosphäre.',
+  'hero.subheadline.sharm': 'Atemberaubende Strände und kristallklares Wasser an einem der schönsten Reiseziele des Roten Meeres.',
+  'hero.subheadline.hurghada': 'Türkisfarbenes Meer und atemberaubende Korallenriffe, perfekt für Meerliebhaber und Abenteurer.',
+  'hero.subheadline.luxor': 'Eine Reise durch die Geschichte zwischen prächtigen Tempeln und legendären pharaonischen Schätzen.',
+  'hero.subheadline.aswan': 'Die Schönheit des Nils, friedliche Landschaften und der authentische Charme der nubischen Kultur.',
+  'hero.subheadline.siwa': 'Eine magische Oase aus Palmen, Seen und natürlichen Quellen im Herzen der Wüste.',
+  'hero.subheadline.whiteDesert': 'Eine surreale Welt aus weißen Felsformationen in einer der spektakulärsten Wüsten Ägyptens.',
   'hero.cta': 'Meine Reise planen',
   'hero.secondaryCta': 'Reiseziele entdecken',
   'hero.rating': 'Mit 4,7/5 von Reisenden bewertet',

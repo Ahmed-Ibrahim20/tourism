@@ -132,7 +132,7 @@ export default function TripBuilder() {
   };
 
   return (
-    <section id="trip-builder" className="relative w-full py-[var(--section-spacing)]">
+    <section id="trip-builder" className="relative w-full py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         {/* ── Section Header ───────────────────────────────────────────── */}
         <motion.div
@@ -335,7 +335,7 @@ export default function TripBuilder() {
                     className="cta-glow rounded-full bg-cyan px-8 font-bold text-navy hover:bg-cyan-light"
                     asChild
                   >
-                    <a href="#contact">
+                    <a href="/#contact">
                       {t('tripBuilder.inquire')}
                       <ArrowRight className="ml-2 size-4" />
                     </a>

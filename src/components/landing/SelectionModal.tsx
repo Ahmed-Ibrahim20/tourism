@@ -425,9 +425,10 @@ export function DemoSelectionModal() {
       descriptionKey: "modal.packagesDesc",
       icon: Landmark,
       href: "/packages",
-      image: "/images/hero/05-luxor.jpg",
     },
   ];
+
+  const { t } = useI18n();
 
   return (
     <>

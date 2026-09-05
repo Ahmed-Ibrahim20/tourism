@@ -1,13 +1,21 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
-  devIndicators: {
-    appIsrStatus: false,
-    buildActivity: false,
+  output: process.env.NODE_ENV === 'production' ? "export" : undefined,
+  distDir: "out",
+  trailingSlash: true,
+  turbopack: {
+    root: path.resolve(__dirname),
   },
+  devIndicators: false,
   images: {
-    qualities: [75, 90],
+    unoptimized: true,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'apitourism.fikriti.com', pathname: '/**' },
+      { protocol: 'http', hostname: 'localhost', pathname: '/**' },
+      { protocol: 'http', hostname: '127.0.0.1', pathname: '/**' },
+    ],
   },
   typescript: {
     ignoreBuildErrors: true,
