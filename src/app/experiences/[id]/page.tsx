@@ -1,5 +1,7 @@
 import ArticleDetailsClient from "./_client";
 
+export const dynamicParams = true;
+
 export function generateStaticParams() {
   const ids = Array.from({ length: 100 }, (_, i) => String(i + 1));
   const expIds = Array.from({ length: 100 }, (_, i) => `exp-${i + 1}`);
