@@ -21,7 +21,7 @@ const MOCK_BOOKINGS = [
     titleEn: 'Luxury Hotel in Alexandria',
     titleAr: 'فندق فاخر في الإسكندرية',
     date: '2026-06-15',
-    price: 900,
+    price: 6000,
     status: 'confirmed',
     image: '/images/hero/06-alexandria.jpg',
     guests: 2
@@ -31,7 +31,7 @@ const MOCK_BOOKINGS = [
     titleEn: 'Dahab Diving Experience',
     titleAr: 'تجربة غوص في دهب',
     date: '2026-07-22',
-    price: 350,
+    price: 3500,
     status: 'pending',
     image: '/images/hero/02-dahab.jpg',
     guests: 1
@@ -41,7 +41,7 @@ const MOCK_BOOKINGS = [
     titleEn: 'Nile Cruise Honeymoon',
     titleAr: 'شهر عسل في رحلة نيلية',
     date: '2025-10-05',
-    price: 2400,
+    price: 2000,
     status: 'completed',
     image: '/images/hero/07-nile.jpg',
     guests: 2
