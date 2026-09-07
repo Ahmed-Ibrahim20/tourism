@@ -70,11 +70,11 @@
   /* Language-specific base font scaling */
   html[lang="fr"],
   html[lang="de"] {
-    font-size: 14.5px;
+    font-size: 14px;
   }
 
   html[lang="ar"] {
-    line-height: 1.6;
+    line-height: 1.5;
   }
 }
 
