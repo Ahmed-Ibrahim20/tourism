@@ -33,10 +33,10 @@ export default function Sidebar({ isCollapsed, toggleCollapse, onLogoutClick }: 
     { name: t('admin.dashboard'), href: '/admin', icon: LayoutDashboard },
     { name: t('admin.bookings'), href: '/admin/bookings', icon: CalendarDays },
     { name: t('admin.destinations'), href: '/admin/destinations', icon: Map },
-    { name: 'Categories', href: '/admin/categories', icon: Layers },
-    { name: 'Services Management (سيرفس ماندج منت)', href: '/admin/services', icon: Compass },
+    { name: t('admin.categories'), href: '/admin/categories', icon: Layers },
+    { name: t('admin.services'), href: '/admin/services', icon: Compass },
     { name: t('admin.packages'), href: '/admin/packages', icon: Package },
-    { name: 'Quote Requests', href: '/admin/quotes', icon: MessageSquareQuote },
+    { name: t('admin.quotes'), href: '/admin/quotes', icon: MessageSquareQuote },
     { name: t('admin.users'), href: '/admin/users', icon: Users },
     { name: t('admin.settings'), href: '/admin/settings', icon: Settings },
   ];
@@ -53,7 +53,7 @@ export default function Sidebar({ isCollapsed, toggleCollapse, onLogoutClick }: 
                 <LayoutDashboard className="size-5 text-cyan" />
               </div>
               <span className="text-xl font-black uppercase tracking-widest text-white whitespace-nowrap">
-                Admin
+                {t('admin.brand')}
               </span>
             </Link>
           )}

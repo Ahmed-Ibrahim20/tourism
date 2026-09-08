@@ -10,7 +10,7 @@ import Footer from '@/components/landing/Footer'
 import ProductCard from '@/components/search/ProductCard'
 import FilterSidebar from '@/components/search/FilterSidebar'
 import { MOCK_PRODUCTS } from '@/lib/mockData'
-import { useI18n } from '@/lib/i18n'
+import { useI18n, sanitizeText } from '@/lib/i18n'
 import {
   Sheet,
   SheetContent,
@@ -164,7 +164,7 @@ function SearchContent() {
     const missingCategories = targetCategories.filter(cat => !presentCategories.has(cat));
     
     // Create dummies for missing categories
-    const loc = searchQuery || (dir === 'rtl' ? 'مصر' : 'Egypt');
+    const loc = sanitizeText(searchQuery || (dir === 'rtl' ? 'مصر' : 'Egypt'), lang);
     
     const dummyProducts = missingCategories.map((cat, idx) => {
       const basePrices: Record<string, number> = {
@@ -177,7 +177,8 @@ function SearchContent() {
       if (priceRange[0] > finalPrice) finalPrice = priceRange[0] + 50;
       if (priceRange[1] < finalPrice) finalPrice = priceRange[1] - 50;
 
-      const titleName = t(`category.${cat}`);
+      const rawCatTitle = t(`category.${cat}`);
+      const titleName = sanitizeText(rawCatTitle, lang);
       const formattedTitle = dir === 'rtl' ? `${titleName} في ${loc}` : `${loc} - ${titleName}`;
       const descText = dir === 'rtl' ? `استمتع بأفضل عروض ${titleName} في ${loc} المصممة خصيصاً لتجربة لا تنسى.` : `Enjoy the best ${titleName} offers in ${loc} designed for an unforgettable experience.`;
 
@@ -195,7 +196,7 @@ function SearchContent() {
     });
     
     return [...filteredProducts, ...dummyProducts];
-  }, [filteredProducts, selectedCategories, searchQuery, backgroundImage, priceRange, dir, t]);
+  }, [filteredProducts, selectedCategories, searchQuery, backgroundImage, priceRange, dir, lang, t]);
 
   const handleReset = () => {
     setSearchQuery('')

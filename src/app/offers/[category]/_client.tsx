@@ -10,7 +10,7 @@ import Navbar from '@/components/landing/Navbar';
 import Footer from '@/components/landing/Footer';
 import ProductCard from '@/components/search/ProductCard';
 import FilterSidebar from '@/components/search/FilterSidebar';
-import { useI18n } from '@/lib/i18n';
+import { useI18n, sanitizeText } from '@/lib/i18n';
 import { apiService, Package, Destination, Category } from '@/services/api';
 import {
   Sheet,
@@ -164,20 +164,29 @@ function OffersClientContent() {
 
   // Destination Name from Backend or URL
   const destinationName = useMemo(() => {
+    let raw = '';
     if (destinationDetails) {
       const trans = destinationDetails.name_translations;
       if (trans && (trans[lang] || trans.ar || trans.en)) {
-        return trans[lang] || trans.ar || trans.en;
+        raw = trans[lang] || trans.ar || trans.en;
+      } else if (destinationDetails.name) {
+        raw = destinationDetails.name;
       }
-      if (destinationDetails.name) return destinationDetails.name;
     }
-    if (locationParam) return locationParam;
+    if (!raw && locationParam) raw = locationParam;
 
-    const catLower = categoryParam.toLowerCase();
-    for (const key of Object.keys(DESTINATION_IMAGES)) {
-      if (catLower.includes(key)) return isRTL ? key : key.charAt(0).toUpperCase() + key.slice(1);
+    if (!raw) {
+      const catLower = categoryParam.toLowerCase();
+      for (const key of Object.keys(DESTINATION_IMAGES)) {
+        if (catLower.includes(key)) {
+          raw = isRTL ? key : key.charAt(0).toUpperCase() + key.slice(1);
+          break;
+        }
+      }
     }
-    return isRTL ? 'شرم الشيخ' : 'Sharm El Sheikh';
+    if (!raw) raw = isRTL ? 'شرم الشيخ' : 'Sharm El Sheikh';
+
+    return sanitizeText(raw, lang);
   }, [destinationDetails, locationParam, categoryParam, isRTL, lang]);
 
   // Hero Cover Image from Backend or Location Map
@@ -194,40 +203,51 @@ function OffersClientContent() {
 
   // Category Title from Backend or Formatted Map
   const categoryTitleFormatted = useMemo(() => {
+    let raw = '';
     if (categoryDetails) {
       const trans = categoryDetails.name_translations;
       if (trans && (trans[lang] || trans.ar || trans.en)) {
-        return trans[lang] || trans.ar || trans.en;
+        raw = trans[lang] || trans.ar || trans.en;
+      } else if (categoryDetails.name) {
+        raw = categoryDetails.name;
       }
-      if (categoryDetails.name) return categoryDetails.name;
     }
 
-    const formattedCatMap: Record<string, { ar: string; en: string }> = {
-      honeymoon: { ar: 'honey moon', en: 'honey moon' },
-      hotels: { ar: 'فنادق ومنتجعات', en: 'hotels & resorts' },
-      experiences: { ar: 'تجارب وأنشطة', en: 'experiences' },
-      trips: { ar: 'رحلات سياحية', en: 'guided trips' },
-      tours: { ar: 'جولات استكشافية', en: 'sightseeing tours' },
-      'diving-marine': { ar: 'رحلات وغوص', en: 'diving & marine' },
-    };
+    if (!raw) {
+      const formattedCatMap: Record<string, { ar: string; en: string }> = {
+        honeymoon: { ar: 'شهر العسل', en: 'Honeymoon' },
+        hotels: { ar: 'فنادق ومنتجعات', en: 'Hotels & Resorts' },
+        experiences: { ar: 'تجارب وأنشطة', en: 'Experiences & Activities' },
+        trips: { ar: 'رحلات سياحية', en: 'Guided Trips' },
+        tours: { ar: 'جولات استكشافية', en: 'Sightseeing Tours' },
+        'diving-marine': { ar: 'رحلات وغوص', en: 'Diving & Marine' },
+      };
 
-    const catInfo = formattedCatMap[categoryParam.toLowerCase()];
-    if (catInfo) return isRTL ? catInfo.ar : catInfo.en;
-    return categoryParam;
+      const catInfo = formattedCatMap[categoryParam.toLowerCase()];
+      if (catInfo) raw = isRTL ? catInfo.ar : catInfo.en;
+      else raw = categoryParam;
+    }
+
+    return sanitizeText(raw, lang);
   }, [categoryDetails, categoryParam, isRTL, lang]);
 
   // Subtitle Description from Backend
   const heroDescription = useMemo(() => {
+    let raw = '';
     if (destinationDetails) {
       const shortDesc = destinationDetails.short_description_translations || (destinationDetails as any).short_description;
       if (typeof shortDesc === 'object' && shortDesc && (shortDesc[lang] || shortDesc.ar || shortDesc.en)) {
-        return shortDesc[lang] || shortDesc.ar || shortDesc.en;
+        raw = shortDesc[lang] || shortDesc.ar || shortDesc.en;
+      } else if (typeof shortDesc === 'string' && shortDesc) {
+        raw = shortDesc;
       }
-      if (typeof shortDesc === 'string' && shortDesc) return shortDesc;
     }
-    return isRTL
-      ? `أفضل الحزم والعروض الفاخرة المتاحة في ${destinationName} لـ ${categoryTitleFormatted}.`
-      : `Handpicked luxury packages available in ${destinationName} for ${categoryTitleFormatted}.`;
+    if (!raw) {
+      raw = isRTL
+        ? `أفضل الحزم والعروض الفاخرة المتاحة في ${destinationName} لـ ${categoryTitleFormatted}.`
+        : `Handpicked luxury packages available in ${destinationName} for ${categoryTitleFormatted}.`;
+    }
+    return sanitizeText(raw, lang);
   }, [destinationDetails, destinationName, categoryTitleFormatted, isRTL, lang]);
 
   // Real Backend Database Filtered Packages
@@ -286,7 +306,7 @@ function OffersClientContent() {
       <Navbar />
 
       {/* HERO SECTION WITH BACKGROUND IMAGE & GRADIENT */}
-      <section className="relative min-h-[380px] sm:min-h-[440px] pt-32 pb-16 flex items-center overflow-hidden border-b border-white/10">
+      <section data-dark="true" className="relative min-h-[380px] sm:min-h-[440px] pt-32 pb-16 flex items-center overflow-hidden border-b border-white/10">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image

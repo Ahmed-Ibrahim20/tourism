@@ -5,7 +5,7 @@ import { motion, useMotionValue } from 'framer-motion'
 import { Star, MapPin, Clock, ArrowRight, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useI18n } from '@/lib/i18n'
+import { useI18n, sanitizeText, getLocalizedField } from '@/lib/i18n'
 import { Button } from '@/components/ui/button'
 import { Package } from '@/services/api'
 import { Product } from '@/lib/mockData'
@@ -16,20 +16,29 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index }: ProductCardProps) {
-  const { t, dir } = useI18n()
+  const { t, dir, lang } = useI18n()
   const isRTL = dir === 'rtl'
   const cardRef = useRef<HTMLDivElement>(null)
 
-  // Normalise product fields
-  const title = (product as any).name || ((product as any).titleKey ? t((product as any).titleKey) : '')
+  // Normalise product fields with strict language isolation
+  const rawTitle = getLocalizedField(product, 'name', lang) || (product as any).title || ((product as any).titleKey ? t((product as any).titleKey) : '')
+  const title = sanitizeText(rawTitle, lang)
+
   const rawImage = (product as any).cover_url || (product as any).image || '/images/hero/01-giza.jpg'
   const [imgSrc, setImgSrc] = useState<string>(rawImage)
   const price = (product as any).min_price ?? (product as any).price ?? 150
   const currency = (product as any).currency || '$'
   const category = (product as any).package_type || (product as any).category || (product as any).service?.category?.slug || 'tours'
-  const location = (product as any).destination?.name || (product as any).location || (isRTL ? 'مصر' : 'Egypt')
-  const duration = (product as any).duration_label || (product as any).duration || (isRTL ? 'رحلة خاصة' : 'Private Tour')
-  const description = (product as any).short_description || ((product as any).descriptionKey ? t((product as any).descriptionKey) : '')
+
+  const rawLocation = (product as any).destination ? getLocalizedField((product as any).destination, 'name', lang) : ((product as any).location || '')
+  const location = sanitizeText(rawLocation || (isRTL ? 'مصر' : 'Egypt'), lang)
+
+  const rawDuration = (product as any).duration_label || (product as any).duration || (isRTL ? 'رحلة خاصة' : 'Private Tour')
+  const duration = sanitizeText(rawDuration, lang)
+
+  const rawDesc = getLocalizedField(product, 'short_description', lang) || getLocalizedField(product, 'description', lang) || ((product as any).descriptionKey ? t((product as any).descriptionKey) : '')
+  const description = sanitizeText(rawDesc, lang)
+
   const slugOrId = (product as any).slug || (product as any).id
 
   // Mouse move effect for shine
@@ -43,12 +52,14 @@ export default function ProductCard({ product, index }: ProductCardProps) {
     mouseY.set(e.clientY - rect.top)
   }
 
-  const categoryLabel = {
+  const rawCategoryLabel = {
     honeymoon: isRTL ? 'شهر العسل' : 'Honeymoon',
-    hotels: isRTL ? 'فنادق فاخرة' : 'Luxury Hotel',
+    hotels: isRTL ? 'فنادق فاخرة' : 'Luxury Hotels',
     tours: isRTL ? 'رحلات خاصة' : 'Private Tours',
     experiences: isRTL ? 'تجارب مميزة' : 'Experience',
   }[category] || (t(`category.${category}`) || category)
+  const categoryLabel = sanitizeText(rawCategoryLabel, lang)
+
 
   return (
     <motion.div
@@ -68,7 +79,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
       />
 
       {/* Image Container */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-navy-light">
+      <div data-dark="true" className="relative aspect-[16/10] w-full overflow-hidden bg-navy-light">
         <Image
           src={imgSrc}
           alt={title}

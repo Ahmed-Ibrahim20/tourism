@@ -22,55 +22,73 @@ const defaultExperiences = [
   {
     id: 1,
     nameKey: "experience.scubaDiving",
-    title: "مغامرات الغوص وسحر الشعاب المرجانية في البحر الأحمر",
+    titleAr: "مغامرات الغوص وسحر الشعاب المرجانية في البحر الأحمر",
+    titleEn: "Scuba Diving Adventures & Coral Reef Magic in the Red Sea",
     image: "/images/experience-diving.png",
-    desc: "اقرأ عن تجارب واستكشاف أعماق البحر الأحمر، وأهم النصائح للغواصين المبتدئين والمحترفين في دهب وشرم الشيخ.",
-    location: "دهب وشرم الشيخ",
+    descAr: "اقرأ عن تجارب واستكشاف أعماق البحر الأحمر، وأهم النصائح للغواصين المبتدئين والمحترفين في دهب وشرم الشيخ.",
+    descEn: "Explore the depths of the Red Sea with top diving tips for beginners and pros in Dahab and Sharm El Sheikh.",
+    locationAr: "دهب وشرم الشيخ",
+    locationEn: "Dahab & Sharm El Sheikh",
     icon: Anchor,
   },
   {
     id: 2,
     nameKey: "experience.desertSafari",
-    title: "سحر الصحراء والنجوم الساطعة في سيناء",
+    titleAr: "سحر الصحراء والنجوم الساطعة في سيناء",
+    titleEn: "Desert Magic & Stargazing Safaris in Sinai",
     image: "/images/experience-desert.png",
-    desc: "دليل شامل لتجارب السفر في الصحراء، ركوب الدراجات الرباعية، وسهرات الجلسات البدوية تحت أضواء النجوم.",
-    location: "صحراء سيناء",
+    descAr: "دليل شامل لتجارب السفر في الصحراء، ركوب الدراجات الرباعية، وسهرات الجلسات البدوية تحت أضواء النجوم.",
+    descEn: "A complete guide to desert safari experiences, quad biking, and authentic Bedouin nights under starry skies.",
+    locationAr: "صحراء سيناء",
+    locationEn: "Sinai Desert",
     icon: Compass,
   },
   {
     id: 3,
     nameKey: "experience.yachtCruise",
-    title: "رحلات اليخوت الفاخرة ومواقع السباحة البكر",
+    titleAr: "رحلات اليخوت الفاخرة ومواقع السباحة البكر",
+    titleEn: "Luxury Yacht Cruises & Pristine Swimming Spots",
     image: "/images/experience-yacht.png",
-    desc: "تجارب الإبحار الخاص في البحر الأحمر، استكشاف الجزر النائية وأجمل الجولات البحرية عند غروب الشمس.",
-    location: "الغردقة والجونة",
+    descAr: "تجارب الإبحار الخاص في البحر الأحمر، استكشاف الجزر النائية وأجمل الجولات البحرية عند غروب الشمس.",
+    descEn: "Private sailing experiences in the Red Sea, exploring remote islands and breathtaking sunset cruises.",
+    locationAr: "الغردقة والجونة",
+    locationEn: "Hurghada & El Gouna",
     icon: Ship,
   },
   {
     id: 4,
     nameKey: "experience.culturalTours",
-    title: "أسرار الفراعنة وعظمة التاريخ في الأقصر وأسوان",
+    titleAr: "أسرار الفراعنة وعظمة التاريخ في الأقصر وأسوان",
+    titleEn: "Secrets of the Pharaohs & Historic Wonders in Luxor and Aswan",
     image: "/images/experience-culture.png",
-    desc: "مقالة تفصيلية عن زيارة المقابر الفرعونية ومعابد الكرنك وفيلة، وأفضل الأوقات لالتقاط أروع الصور التذكارية.",
-    location: "الأقصر وأسوان",
+    descAr: "مقالة تفصيلية عن زيارة المقابر الفرعونية ومعابد الكرنك وفيلة، وأفضل الأوقات لالتقاط أروع الصور التذكارية.",
+    descEn: "In-depth guide to visiting royal pharaonic tombs, Karnak & Philae temples, and iconic photography spots.",
+    locationAr: "الأقصر وأسوان",
+    locationEn: "Luxor & Aswan",
     icon: Landmark,
   },
   {
     id: 5,
     nameKey: "experience.snorkeling",
-    title: "عالم الألوان تحت الماء في الثقب الأزرق",
+    titleAr: "عالم الألوان تحت الماء في الثقب الأزرق",
+    titleEn: "Underwater Color World at the Blue Hole",
     image: "/images/experience-snorkeling.png",
-    desc: "نصائح وإرشادات للسباحة والغطس السطحي بين الأسماك الاستوائية والشعاب المرجانية في محميات سيناء.",
-    location: "دهب - Blue Hole",
+    descAr: "نصائح وإرشادات للسباحة والغطس السطحي بين الأسماك الاستوائية والشعاب المرجانية في محميات سيناء.",
+    descEn: "Essential advice for snorkeling among vibrant tropical fish and coral reefs in Sinai reserves.",
+    locationAr: "دهب - الثقب الأزرق",
+    locationEn: "Dahab - Blue Hole",
     icon: Fish,
   },
   {
     id: 6,
     nameKey: "experience.spaWellness",
-    title: "الاسترخاء والرفاهية الصحية على شواطئ البحر",
+    titleAr: "الاسترخاء والرفاهية الصحية على شواطئ البحر",
+    titleEn: "Coastal Relaxation & Seaside Wellness Spas",
     image: "/images/experience-spa.png",
-    desc: "تجربة التعافي والاستجمام الطبيعي، وجلسات السبا المميزة مع إطلالات بانورامية ساحرة على البحر.",
-    location: "منتجعات سيناء",
+    descAr: "تجربة التعافي والاستجمام الطبيعي، وجلسات السبا المميزة مع إطلالات بانورامية ساحرة على البحر.",
+    descEn: "Rejuvenating wellness escapes and luxury spa treatments accompanied by panoramic Red Sea views.",
+    locationAr: "منتجعات سيناء",
+    locationEn: "Sinai Resorts",
     icon: Sparkles,
   },
 ];
@@ -182,6 +200,10 @@ export default function Experiences() {
               })
             : defaultExperiences.map((exp, i) => {
                 const Icon = exp.icon;
+                const expTitle = lang === 'ar' ? exp.titleAr : exp.titleEn;
+                const expDesc = lang === 'ar' ? exp.descAr : exp.descEn;
+                const expLocation = lang === 'ar' ? exp.locationAr : exp.locationEn;
+
                 return (
                   <motion.div
                     key={exp.id}
@@ -198,7 +220,7 @@ export default function Experiences() {
                         <div className="relative h-52 w-full overflow-hidden rounded-2xl mb-4 bg-navy-light">
                           <Image
                             src={exp.image}
-                            alt={exp.title}
+                            alt={expTitle}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-110"
                           />
@@ -206,16 +228,16 @@ export default function Experiences() {
                           <div className="absolute top-3 left-3">
                             <span className="rounded-full bg-navy/80 border border-cyan/30 px-3 py-1 text-xs font-bold text-cyan backdrop-blur-md flex items-center gap-1">
                               <MapPin className="size-3 text-cyan" />
-                              {exp.location}
+                              {expLocation}
                             </span>
                           </div>
                         </div>
 
                         <h3 className="text-xl font-bold text-white group-hover:text-cyan transition-colors mb-2.5 line-clamp-2 leading-snug">
-                          {exp.title}
+                          {expTitle}
                         </h3>
                         <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed mb-4">
-                          {exp.desc}
+                          {expDesc}
                         </p>
                       </div>
 
