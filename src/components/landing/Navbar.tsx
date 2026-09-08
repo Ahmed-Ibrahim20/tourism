@@ -180,8 +180,8 @@ function MobileMenuContent({
       {/* Logo */}
       <SheetHeader className="mb-10">
         <SheetTitle className="flex flex-col items-center gap-4 text-center">
-          <div className="relative flex h-14 w-14 md:h-16 md:w-16 rounded-md overflow-hidden shadow-lg border border-cyan/20">
-            <Image src="/images/image.png" alt="Dahab Dream" fill className="object-cover" />
+          <div className="relative flex h-16 w-16 md:h-20 md:w-20 rounded-2xl overflow-hidden bg-black p-2 border border-cyan/30 shadow-[0_0_20px_rgba(0,212,255,0.25)]">
+            <Image src="/images/image.png" alt="Dahab Dream" fill className="object-contain p-1" />
           </div>
           <span className="inline-flex items-center justify-center rounded-full bg-white/10 px-5 py-2 backdrop-blur-md border border-white/20 shadow-lg">
             <span className="bg-gradient-to-r from-white via-cyan-300 to-white bg-clip-text text-[11px] md:text-xs font-bold uppercase tracking-[0.2em] text-transparent drop-shadow-md">
@@ -459,8 +459,8 @@ export default function Navbar() {
           <div className="flex items-center gap-6 lg:gap-10">
             {/* ---- LEFT: Logo ---- */}
             <a href="/" className="group flex items-center justify-center gap-2 no-underline shrink-0">
-              <div className="relative flex h-8 w-8 md:h-10 md:w-10 rounded-md overflow-hidden shadow-lg shadow-black/20 border border-cyan/20 transition-transform duration-300 group-hover:scale-105">
-                <Image src="/images/image.png" alt="Dahab Dream Tour" fill className="object-cover" priority />
+              <div className="relative flex h-9 w-9 md:h-11 md:w-11 rounded-xl overflow-hidden bg-black p-1 border border-cyan/30 shadow-[0_0_15px_rgba(0,212,255,0.25)] transition-all duration-300 group-hover:scale-105 group-hover:border-cyan">
+                <Image src="/images/image.png" alt="Dahab Dream Tour" fill className="object-contain p-0.5" priority />
               </div>
               <span className="inline-flex items-center justify-center rounded-full bg-white/10 px-2.5 py-0.5 md:px-3 md:py-1 backdrop-blur-md border border-white/20 shadow-sm transition-all duration-300 group-hover:bg-white/15">
                 <span className="bg-gradient-to-r from-white via-[#00D4FF] to-white bg-clip-text text-[9px] md:text-[10px] font-bold uppercase tracking-[0.05em] md:tracking-[0.15em] text-transparent drop-shadow-sm max-w-[100px] sm:max-w-none line-clamp-1 sm:line-clamp-none" suppressHydrationWarning>
@@ -581,7 +581,7 @@ export default function Navbar() {
                   side={dir === 'rtl' ? 'left' : 'right'}
                   className={`w-[320px] bg-navy/95 p-0 backdrop-blur-xl sm:w-[360px] ${
                     dir === 'rtl' ? 'border-r' : 'border-l'
-                  } border-cyan/10`}
+                  } border-cyan/10 keep-dark`}
                 >
                   <MobileMenuContent
                     activeSection={activeSection}
@@ -603,7 +603,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 z-[60] bg-navy/95 backdrop-blur-2xl p-6 md:p-12 overflow-y-auto"
+            className="fixed inset-0 z-[60] bg-navy/95 backdrop-blur-2xl p-6 md:p-12 overflow-y-auto keep-dark"
           >
             <div className="mx-auto max-w-4xl flex flex-col gap-10 md:gap-16 pt-8">
               <div className="flex items-center justify-between">

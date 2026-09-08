@@ -196,8 +196,8 @@ export default function Footer() {
           <motion.div variants={itemVariants} className="lg:col-span-1">
             {/* Logo */}
             <a href="/#home" className="mb-4 inline-flex items-center justify-center no-underline">
-              <div className="relative flex h-16 w-16 md:h-20 md:w-20 rounded-md overflow-hidden shadow-lg border border-cyan/20">
-                <Image src="/images/image.png" alt="Dahab Dream Tour" fill className="object-cover" />
+              <div className="relative flex h-16 w-16 md:h-20 md:w-20 rounded-2xl overflow-hidden bg-black p-2 border border-cyan/30 shadow-[0_0_25px_rgba(0,212,255,0.25)] transition-transform duration-300 hover:scale-105">
+                <Image src="/images/image.png" alt="Dahab Dream Tour" fill className="object-contain p-1" />
               </div>
             </a>
 

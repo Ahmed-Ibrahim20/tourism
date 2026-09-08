@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Heart, Building2, Compass, Map, ArrowRight, Sparkles, Layers, Loader2 } from "lucide-react";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, sanitizeText } from "@/lib/i18n";
 import { apiService, Category } from "@/services/api";
 
 /* ── Types ─────────────────────────────────────────────────────────────────── */
@@ -113,6 +113,9 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
 
   if (!destination) return null;
 
+  const destName = sanitizeText(destination.name, lang);
+  const destTagline = sanitizeText(destination.tagline, lang);
+
   return (
     <AnimatePresence>
       {destination && (
@@ -150,10 +153,10 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
             </button>
 
             {/* ── Header Section ───────────────────────────── */}
-            <div className="relative h-[200px] md:h-[280px] w-full shrink-0 overflow-hidden">
+            <div data-dark="true" className="relative h-[200px] md:h-[280px] w-full shrink-0 overflow-hidden">
               <Image
                 src={destination.image}
-                alt={destination.name}
+                alt={destName}
                 fill
                 className="object-cover"
                 priority
@@ -162,13 +165,13 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
 
               <div className={`absolute inset-0 flex flex-col justify-end p-5 md:p-10 lg:px-12 ${isRTL ? 'text-right' : 'text-left'}`}>
                 <h2 className="text-3xl font-black text-white md:text-5xl drop-shadow-lg">
-                  {destination.name}
+                  {destName}
                 </h2>
                 <div className="mt-1.5 text-base font-semibold text-cyan-light drop-shadow-md md:text-lg">
-                  {destination.tagline}
+                  {destTagline}
                 </div>
                 <p className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-200 md:text-sm">
-                  {t("destinations.modalDescription", { name: destination.name })}
+                  {t("destinations.modalDescription", { name: destName })}
                 </p>
               </div>
             </div>
@@ -186,20 +189,24 @@ export default function DestinationModal({ destination, onClose }: DestinationMo
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-6">
                   {categories.map((cat) => {
                     const catSlug = cat.slug || String(cat.id);
-                    const catName = cat.name_translations?.[lang] || cat.name;
-                    const catDesc = cat.description_translations?.[lang] || cat.description || '';
+                    const rawName = cat.name_translations?.[lang] || cat.name_translations?.['en'] || cat.name;
+                    const catName = sanitizeText(rawName, lang);
+                    const rawDesc = cat.description_translations?.[lang] || cat.description_translations?.['en'] || cat.description || '';
+                    const catDesc = sanitizeText(rawDesc, lang);
                     
                     const meta = categoryMeta[catSlug.toLowerCase()] || { image: "/images/hero/02-dahab.jpg", icon: Layers };
                     const IconComponent = meta.icon;
                     const catImg = cat.cover_url || cat.cover_image || cat.image || meta.image;
 
                     // Search URL pointing specifically to BOTH destination_id AND category_id
-                    const searchUrl = `/offers/${catSlug}?destination_id=${destination.id}&category_id=${cat.id}&location=${encodeURIComponent(destination.name)}`;
+                    const searchUrl = `/offers/${catSlug}?destination_id=${destination.id}&category_id=${cat.id}&location=${encodeURIComponent(destName)}`;
+
 
                     return (
                       <Link
                         key={cat.id}
                         href={searchUrl}
+                        data-dark="true"
                         className="glass-card group relative flex h-[220px] md:h-[280px] cursor-pointer flex-col justify-end overflow-hidden rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1.5 will-change-transform"
                       >
                         {/* Card Background Image */}
