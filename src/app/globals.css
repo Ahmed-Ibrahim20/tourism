@@ -36,6 +36,194 @@
   --container-padding: 1.5rem;
 }
 
+.light {
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --border: rgba(2, 132, 199, 0.2);
+  --input: rgba(241, 245, 249, 1);
+  --ring: #0284C7;
+}
+
+.light body {
+  background-color: #F8FAFC;
+  color: #0F172A;
+}
+
+/* Keep dark containers truly dark & readable in light mode */
+.light .keep-dark,
+.light [data-dark="true"] {
+  color: #F8FAFC;
+}
+
+.light .keep-dark.bg-navy,
+.light [data-dark="true"].bg-navy,
+.light .keep-dark.bg-\[\#0A192F\],
+.light [data-dark="true"].bg-\[\#0A192F\] {
+  background-color: #0A192F !important;
+}
+
+.light .bg-black {
+  background-color: #000000 !important;
+}
+
+/* Text contrast fixes for light mode */
+.light .text-white:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #0F172A !important;
+}
+
+.light .text-slate-100:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #0F172A !important;
+}
+
+.light .text-slate-200:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #1E293B !important;
+}
+
+.light .text-slate-300:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #334155 !important;
+}
+
+.light .text-slate-400:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #475569 !important;
+}
+
+.light .text-slate-500:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #64748B !important;
+}
+
+/* Inside dark contexts (keep-dark or data-dark="true"), preserve white & light text */
+.light .keep-dark .text-white,
+.light [data-dark="true"] .text-white,
+.light .keep-dark .text-white\/90,
+.light [data-dark="true"] .text-white\/90,
+.light .keep-dark .text-white\/80,
+.light [data-dark="true"] .text-white\/80 {
+  color: #FFFFFF !important;
+}
+
+.light .keep-dark .text-slate-100,
+.light [data-dark="true"] .text-slate-100,
+.light .keep-dark .text-slate-200,
+.light [data-dark="true"] .text-slate-200,
+.light .keep-dark .text-slate-300,
+.light [data-dark="true"] .text-slate-300 {
+  color: #E2E8F0 !important;
+}
+
+.light .keep-dark .text-slate-400,
+.light [data-dark="true"] .text-slate-400 {
+  color: #94A3B8 !important;
+}
+
+/* Cyan text contrast enhancement in Light mode */
+.light .text-cyan:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #0284C7 !important;
+}
+
+.light .text-cyan-light:not(.keep-dark *):not([data-dark="true"] *) {
+  color: #0369A1 !important;
+}
+
+.light .keep-dark .text-cyan,
+.light [data-dark="true"] .text-cyan {
+  color: #00D4FF !important;
+}
+
+.light .keep-dark .text-cyan-light,
+.light [data-dark="true"] .text-cyan-light {
+  color: #67E8F9 !important;
+}
+
+/* Gradient text readability in Light Mode */
+.light .gradient-text:not(.keep-dark *):not([data-dark="true"] *) {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 50%, #0F172A 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.light .keep-dark .gradient-text,
+.light [data-dark="true"] .gradient-text {
+  background: linear-gradient(135deg, #00D4FF 0%, #67E8F9 50%, #00D4FF 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Form Controls in Light Mode */
+.light input:not(.keep-dark *):not([data-dark="true"] *),
+.light textarea:not(.keep-dark *):not([data-dark="true"] *),
+.light select:not(.keep-dark *):not([data-dark="true"] *) {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
+  color-scheme: light !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #64748B !important;
+}
+
+/* Card background overrides for light mode */
+.light .bg-navy:not(.keep-dark):not([data-dark="true"]) {
+  background-color: #FFFFFF !important;
+}
+
+.light .bg-navy\/90:not(.keep-dark):not([data-dark="true"]) {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.light .bg-navy\/80:not(.keep-dark):not([data-dark="true"]) {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.light .bg-navy\/50:not(.keep-dark):not([data-dark="true"]) {
+  background-color: rgba(241, 245, 249, 0.85) !important;
+}
+
+.light .bg-\[\#0A192F\]:not(.keep-dark):not([data-dark="true"]) {
+  background-color: #F8FAFC !important;
+}
+
+.light .border-white\/5:not(.keep-dark *):not([data-dark="true"] *) {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.light .border-white\/10:not(.keep-dark *):not([data-dark="true"] *) {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+.light .border-white\/20:not(.keep-dark *):not([data-dark="true"] *) {
+  border-color: rgba(15, 23, 42, 0.18) !important;
+}
+
+.light .bg-white\/5:not(.keep-dark *):not([data-dark="true"] *) {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+.light .bg-white\/10:not(.keep-dark *):not([data-dark="true"] *) {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(2, 132, 199, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.light .glass-strong {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(2, 132, 199, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(2, 132, 199, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
 @media (min-width: 768px) {
   :root {
     --section-spacing: 7rem;

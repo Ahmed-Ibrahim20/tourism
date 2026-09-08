@@ -1,8 +1,6 @@
 import { Suspense } from 'react';
 import ProductDetailPageClient from './_client';
 
-export const dynamicParams = true;
-
 export function generateStaticParams() {
   const ids = Array.from({ length: 100 }, (_, i) => String(i + 1));
   const catIds = Array.from({ length: 100 }, (_, i) => `cat-${i + 1}`);

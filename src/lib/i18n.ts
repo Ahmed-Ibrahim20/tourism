@@ -118,3 +118,191 @@ export const LANGUAGES = [
   { code: 'fr', label: 'Français', flag: '🇫🇷' },
 ] as const;
 
+export const AR_TO_EN_DICTIONARY: Record<string, string> = {
+  // Destinations
+  'القاهرة': 'Cairo',
+  'أهرامات الجيزة': 'Giza Pyramids',
+  'الجيزة': 'Giza',
+  'دهب': 'Dahab',
+  'شرم الشيخ': 'Sharm El-Sheikh',
+  'الغردقة': 'Hurghada',
+  'الجونة': 'El Gouna',
+  'الأقصر': 'Luxor',
+  'أسوان': 'Aswan',
+  'رحلة النيل الملكية': 'Nile Cruise',
+  'رحلة النيل': 'Nile Cruise',
+  'النيل': 'Nile',
+  'الإسكندرية': 'Alexandria',
+  'واحة سيوة': 'Siwa Oasis',
+  'سيوة': 'Siwa Oasis',
+  'الصحراء البيضاء': 'White Desert',
+  'جبل سيناء': 'Mount Sinai',
+  'سيناء': 'Sinai',
+  'مرسى علم': 'Marsa Alam',
+  'طابا': 'Taba',
+  'نويبع': 'Nuweiba',
+  'مصر': 'Egypt',
+
+  // Categories & Services
+  'شهر العسل': 'Honeymoon',
+  'باقات شهر العسل': 'Honeymoon Packages',
+  'فنادق': 'Hotels',
+  'فنادق ومنتجعات': 'Hotels & Resorts',
+  'فنادق فاخرة': 'Luxury Hotels',
+  'رحلات': 'Trips',
+  'رحلات سياحية': 'Guided Trips',
+  'رحلات خاصة': 'Private Tours',
+  'تجارب': 'Experiences',
+  'تجارب وأنشطة': 'Experiences & Activities',
+  'تجارب مميزة': 'Featured Experiences',
+  'جولات': 'Tours',
+  'جولات استكشافية': 'Sightseeing Tours',
+  'غطس بحري': 'Diving & Marine',
+  'رحلات وغوص': 'Diving & Marine',
+  'أنشطة بحرية': 'Marine Activities',
+
+  // Durations & Packages
+  'رحلة يوم واحد': '1-Day Tour',
+  '3 أيام / 2 ليلة': '3 Days / 2 Nights',
+  '4 أيام / 3 ليالي': '4 Days / 3 Nights',
+  '5 أيام / 4 ليالي': '5 Days / 4 Nights',
+  '7 أيام / 6 ليالي': '7 Days / 6 Nights',
+  'يوم واحد': '1 Day',
+  'حسب الاختيار': 'Custom',
+
+  // Common titles / Mock items
+  'مغامرة الغوص في دهب': 'Dahab Diving Adventure',
+  'سفاري صحراء سيوة': 'Siwa Desert Safari',
+  'إبحار النيل الفاخر بين الأقصر وأسوان': 'Luxurious Nile Cruise between Luxor & Aswan',
+  'إقامة ملكية في الجونة': 'Royal Stay in El Gouna',
+  'رحلة وادي الملوك والأقصر': 'Valley of the Kings & Luxor Tour',
+  'سفاري الصحراء البيضاء وشروق الشمس': 'White Desert Safari & Sunrise',
+  'عطلة شرم الشيخ الشاملة': 'All-Inclusive Sharm El-Sheikh Getaway',
+  'جولة أهرامات الجيزة والمتحف الكبير': 'Giza Pyramids & Grand Museum Tour',
+
+  // Common UI labels
+  'عرض التفاصيل والحجز': 'View Details & Book',
+  'عرض التفاصيل': 'View Details',
+  'خطّط رحلتك': 'Plan Your Trip',
+  'ابحث الآن': 'Search Now',
+  'تصفية': 'Filter',
+  'الكل': 'All',
+  'جميع الباقات': 'All Packages',
+  'يبدأ من': 'From',
+  'شامل الإفطار': 'Breakfast Included',
+  'شامل جميع الوجبات': 'All Inclusive',
+};
+
+export const EN_TO_AR_DICTIONARY: Record<string, string> = {
+  'Cairo': 'القاهرة',
+  'Giza Pyramids': 'أهرامات الجيزة',
+  'Giza': 'الجيزة',
+  'Dahab': 'دهب',
+  'Sharm El-Sheikh': 'شرم الشيخ',
+  'Sharm El Sheikh': 'شرم الشيخ',
+  'Hurghada': 'الغردقة',
+  'El Gouna': 'الجونة',
+  'Luxor': 'الأقصر',
+  'Aswan': 'أسوان',
+  'Nile Cruise': 'رحلة النيل الملكية',
+  'Nile': 'النيل',
+  'Alexandria': 'الإسكندرية',
+  'Siwa Oasis': 'واحة سيوة',
+  'Siwa': 'سيوة',
+  'White Desert': 'الصحراء البيضاء',
+  'Mount Sinai': 'جبل سيناء',
+  'Sinai': 'سيناء',
+  'Marsa Alam': 'مرسى علم',
+  'Taba': 'طابا',
+  'Nuweiba': 'نويبع',
+  'Egypt': 'مصر',
+  'Honeymoon': 'شهر العسل',
+  'Luxury Hotels': 'فنادق فاخرة',
+  'Hotels': 'فنادق',
+  'Private Tours': 'رحلات خاصة',
+  'Trips': 'رحلات',
+  'Experiences': 'تجارب',
+  'Featured Experiences': 'تجارب مميزة',
+  'Tours': 'جولات',
+  'Diving & Marine': 'غطس بحري',
+};
+
+/**
+ * Ensures strict language isolation.
+ * If active language is non-Arabic (e.g., 'en'), guarantees NO Arabic characters are returned.
+ * If active language is Arabic ('ar'), guarantees NO English destination/category placeholders remain.
+ */
+export function sanitizeText(text: string, lang: string): string {
+  if (!text || typeof text !== 'string') return '';
+  const trimmed = text.trim();
+
+  // If language is English (or non-Arabic)
+  if (lang !== 'ar') {
+    if (AR_TO_EN_DICTIONARY[trimmed]) {
+      return AR_TO_EN_DICTIONARY[trimmed];
+    }
+    if (/[\u0600-\u06FF]/.test(trimmed)) {
+      let cleaned = trimmed;
+      for (const [arKey, enVal] of Object.entries(AR_TO_EN_DICTIONARY)) {
+        if (cleaned.includes(arKey)) {
+          cleaned = cleaned.replace(new RegExp(arKey, 'g'), enVal);
+        }
+      }
+      if (/[\u0600-\u06FF]/.test(cleaned)) {
+        return AR_TO_EN_DICTIONARY[trimmed] || 'Explore Egypt';
+      }
+      return cleaned;
+    }
+    return trimmed;
+  }
+
+  // If language is Arabic ('ar')
+  if (lang === 'ar') {
+    if (EN_TO_AR_DICTIONARY[trimmed]) {
+      return EN_TO_AR_DICTIONARY[trimmed];
+    }
+    let cleaned = trimmed;
+    for (const [enKey, arVal] of Object.entries(EN_TO_AR_DICTIONARY)) {
+      if (cleaned.toLowerCase().includes(enKey.toLowerCase())) {
+        cleaned = cleaned.replace(new RegExp(enKey, 'gi'), arVal);
+      }
+    }
+    return cleaned;
+  }
+
+  return trimmed;
+}
+
+export function getLocalizedField(
+  entity: any,
+  field: string,
+  lang: string
+): string {
+  if (!entity) return '';
+
+  const translationsMap =
+    entity[`${field}_translations`] || entity.translations || entity.title_translations;
+  if (translationsMap && typeof translationsMap === 'object') {
+    const val = translationsMap[lang] || translationsMap[lang === 'ar' ? 'ar' : 'en'];
+    if (val && typeof val === 'string') {
+      return sanitizeText(val, lang);
+    }
+  }
+
+  if (lang === 'ar') {
+    const valAr = entity[`${field}_ar`] || entity[`${field}Ar`];
+    if (valAr) return sanitizeText(String(valAr), lang);
+  } else {
+    const valEn = entity[`${field}_en`] || entity[`${field}En`];
+    if (valEn) return sanitizeText(String(valEn), lang);
+  }
+
+  const baseVal = entity[field] || entity.title || entity.name;
+  if (baseVal) {
+    return sanitizeText(String(baseVal), lang);
+  }
+
+  return '';
+}
+
+

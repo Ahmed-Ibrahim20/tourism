@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from 'next-themes';
 import { 
   Bell, 
   Search, 
@@ -14,16 +15,16 @@ import { useI18n, LANGUAGES, Lang } from '@/lib/i18n';
 
 export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const { lang, setLang, dir, t } = useI18n();
-  const [isLightMode, setIsLightMode] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [notifDropdownOpen, setNotifDropdownOpen] = useState(false);
 
   const langRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
 
-  // Initialize theme from HTML class
   useEffect(() => {
-    setIsLightMode(document.documentElement.classList.contains('light'));
+    setMounted(true);
   }, []);
 
   // Handle click outside
@@ -41,16 +42,7 @@ export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const toggleTheme = () => {
-    const html = document.documentElement;
-    if (isLightMode) {
-      html.classList.remove('light');
-      setIsLightMode(false);
-    } else {
-      html.classList.add('light');
-      setIsLightMode(true);
-    }
-  };
+  const isLightMode = theme === 'light';
 
   return (
     <header className="sticky top-0 z-30 flex h-20 w-full shrink-0 items-center justify-between border-b border-white/5 bg-navy/80 px-4 backdrop-blur-xl sm:px-6 lg:px-8">
@@ -67,7 +59,7 @@ export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
           <Search className={`absolute ${dir === 'rtl' ? 'right-4' : 'left-4'} top-1/2 size-4 -translate-y-1/2 text-slate-500`} />
           <input
             type="text"
-            placeholder="Search..."
+            placeholder={t('admin.searchPlaceholder')}
             className={`h-11 w-64 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-slate-500 focus:border-cyan/30 focus:bg-white/10 focus:outline-none transition-all ${dir === 'rtl' ? 'pr-11 pl-4' : 'pl-11 pr-4'}`}
           />
         </div>
@@ -78,11 +70,11 @@ export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
         
         {/* Theme Toggle */}
         <button
-          onClick={toggleTheme}
+          onClick={() => setTheme(isLightMode ? 'dark' : 'light')}
           className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all hover:bg-cyan/10 hover:text-cyan hover:border-cyan/20"
           aria-label="Toggle Theme"
         >
-          {isLightMode ? <Moon className="size-5" /> : <Sun className="size-5" />}
+          {mounted && isLightMode ? <Moon className="size-5" /> : <Sun className="size-5" />}
         </button>
 
         {/* Language Toggle */}
@@ -143,15 +135,15 @@ export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
                 exit={{ opacity: 0, y: 10 }}
                 className={`absolute top-full mt-2 w-72 rounded-xl border border-white/10 bg-navy/95 p-4 shadow-2xl backdrop-blur-xl ${dir === 'rtl' ? 'left-0' : 'right-0'}`}
               >
-                <h3 className="font-bold text-white mb-3 pb-2 border-b border-white/10">{dir === 'rtl' ? 'الإشعارات' : 'Notifications'}</h3>
+                <h3 className="font-bold text-white mb-3 pb-2 border-b border-white/10">{t('admin.notifications')}</h3>
                 <div className="space-y-3">
                   <div className="flex flex-col gap-1">
-                    <span className="text-sm font-semibold text-white">{dir === 'rtl' ? 'حجز جديد!' : 'New Booking!'}</span>
+                    <span className="text-sm font-semibold text-white">{t('admin.newBooking')}</span>
                     <span className="text-xs text-slate-400">Ahmed Hassan - Royal Honeymoon</span>
                     <span className="text-xs text-cyan">2 mins ago</span>
                   </div>
                   <div className="flex flex-col gap-1 opacity-60">
-                    <span className="text-sm font-semibold text-white">{dir === 'rtl' ? 'تم الدفع' : 'Payment Received'}</span>
+                    <span className="text-sm font-semibold text-white">{t('admin.paymentReceived')}</span>
                     <span className="text-xs text-slate-400">Booking #BKG-548123</span>
                     <span className="text-xs text-cyan">1 hour ago</span>
                   </div>
@@ -160,7 +152,7 @@ export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
                   onClick={() => setNotifDropdownOpen(false)}
                   className="w-full mt-4 py-2 rounded-lg bg-white/5 text-xs font-bold text-slate-300 hover:bg-white/10 hover:text-white transition-colors"
                 >
-                  {dir === 'rtl' ? 'تحديد الكل كمقروء' : 'Mark all as read'}
+                  {t('admin.markAllRead')}
                 </button>
               </motion.div>
             )}
@@ -168,10 +160,10 @@ export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
         </div>
 
         {/* User Profile */}
-        <div className="ml-2 flex items-center gap-3 border-l border-white/10 pl-4">
-          <div className="hidden flex-col text-right sm:flex">
-            <span className="text-sm font-bold text-white">Admin User</span>
-            <span className="text-xs font-medium uppercase tracking-widest text-cyan">Manager</span>
+        <div className="ml-2 flex items-center gap-3 border-l border-white/10 pl-4 rtl:border-r rtl:border-l-0 rtl:pr-4 rtl:pl-0">
+          <div className="hidden flex-col text-right sm:flex rtl:text-right ltr:text-left">
+            <span className="text-sm font-bold text-white">{t('admin.userName')}</span>
+            <span className="text-xs font-medium uppercase tracking-widest text-cyan">{t('admin.userRole')}</span>
           </div>
           <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan to-blue-600 text-sm font-black text-white shadow-lg">
             AU
@@ -181,3 +173,4 @@ export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
     </header>
   );
 }
+
