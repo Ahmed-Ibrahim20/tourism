@@ -16,7 +16,7 @@ export const API_CONFIG = {
   
   // Supported locales
   DEFAULT_LOCALE: 'ar',
-  SUPPORTED_LOCALES: ['ar', 'en', 'es', 'it', 'de', 'fr'] as const,
+  SUPPORTED_LOCALES: ['ar', 'en', 'es', 'it'] as const,
 };
 
 export type SupportedLocale = typeof API_CONFIG.SUPPORTED_LOCALES[number];
