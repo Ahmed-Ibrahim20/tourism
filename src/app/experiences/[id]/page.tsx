@@ -1,6 +1,6 @@
 import ArticleDetailsClient from "./_client";
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   const ids = Array.from({ length: 100 }, (_, i) => String(i + 1));

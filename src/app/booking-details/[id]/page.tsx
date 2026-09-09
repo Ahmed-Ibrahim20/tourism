@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import BookingDetailsClient from './_client';
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   const numericIds = Array.from({ length: 100 }, (_, i) => String(i + 1));
