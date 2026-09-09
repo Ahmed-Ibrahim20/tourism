@@ -256,8 +256,8 @@
   }
 
   /* Language-specific base font scaling */
-  html[lang="fr"],
-  html[lang="de"] {
+  html[lang="es"],
+  html[lang="it"] {
     font-size: 14.5px;
   }
 

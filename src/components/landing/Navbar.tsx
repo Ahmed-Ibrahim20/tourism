@@ -42,10 +42,10 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 const LANGUAGES: { code: Lang; flag: string; label: string }[] = [
-  { code: 'en', flag: '🇬🇧', label: 'English' },
+  { code: 'en', flag: 'en', label: 'English' },
   { code: 'ar', flag: '🇪🇬', label: 'العربية' },
-  { code: 'de', flag: '🇩🇪', label: 'Deutsch' },
-  { code: 'fr', flag: '🇫🇷', label: 'Français' },
+  { code: 'es', flag: '🇪🇸', label: 'Español' },
+  { code: 'it', label: 'Italiano', flag: '🇮🇹' },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -270,7 +270,7 @@ function MobileMenuContent({
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-foreground/40">
             {t('nav.language')}
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {LANGUAGES.map((l) => (
               <button
                 key={l.code}

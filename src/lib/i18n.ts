@@ -110,12 +110,10 @@ if (typeof window !== 'undefined') {
 }
 
 export const LANGUAGES = [
-  { code: 'ar', label: 'العربية', flag: '🇪🇬' },
-  { code: 'en', label: 'English', flag: '🇺🇸' },
-  { code: 'es', label: 'Español', flag: '🇪🇸' },
-  { code: 'it', label: 'Italiano', flag: '🇮🇹' },
-  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
-  { code: 'fr', label: 'Français', flag: '🇫🇷' },
+  { code: 'ar', label: 'العربية', flag: 'AR' },
+  { code: 'en', label: 'English', flag: 'EN' },
+  { code: 'es', label: 'Español', flag: 'ES' },
+  { code: 'it', label: 'Italiano', flag: 'IT' },
 ] as const;
 
 export const AR_TO_EN_DICTIONARY: Record<string, string> = {
